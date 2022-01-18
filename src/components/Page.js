@@ -22,9 +22,10 @@ export const createPage = ({
   bgImageDesktop,
   bgImageTablet,
   bgImageMobile,
+  navbarItems,
 }) => {
-  console.log("createPage:", bgImageMobile);
   const Page = styled.div`
+    display: flow-root;
     min-height: 100vh;
     background-size: cover;
     background-position: center center;
@@ -34,15 +35,15 @@ export const createPage = ({
     ${setBackgroundImageUrl(bgImageMobile, "750px")}
   `;
 
-  return (props) => (
+  console.log(navbarItems);
+
+  return () => (
     <Page>
       <h3 style={{ color: "white" }}>{pageName}</h3>
-      <Navs
-        links={[
-          { title: "1", url: "#" },
-          { title: "2", url: "#" },
-        ]}
-      />
+      <Navs items={navbarItems} rounds />
+      <Navs items={navbarItems} />
+      <Navs items={navbarItems} tabs />
+      <Navs items={navbarItems} bullets />
     </Page>
   );
 };

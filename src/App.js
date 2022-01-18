@@ -8,7 +8,7 @@ console.log(HomePage);
 function App() {
   return (
     <div className="App">
-      <HomePage />
+      <HomePage className="xxx" />
     </div>
   );
 }

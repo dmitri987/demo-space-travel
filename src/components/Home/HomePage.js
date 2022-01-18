@@ -11,6 +11,11 @@ const HomePage = createPage({
   bgImageDesktop,
   bgImageTablet,
   bgImageMobile,
+  navbarItems: [
+    { title: "moon", url: "#moon" },
+    { title: "mars", url: "#mars" },
+    { title: "venus", url: "#venus" },
+  ],
 });
 
 // const HomePage = (props) => {
