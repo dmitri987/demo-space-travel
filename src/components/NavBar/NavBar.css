@@ -1,0 +1,68 @@
+:root {
+  --menu-background-color: rgba(256 256 256 / 20%);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* margin-inline-start: 2rem; */
+  /* margin-top: 1rem; */
+  height: 6rem;
+}
+
+.navbar.desktop {
+  margin-inline-start: 3rem;
+  margin-top: 2rem;
+}
+
+.navbar.tablet {
+  margin-inline-start: 2.5rem;
+  /* margin-top: 1rem; */
+}
+
+.navbar.mobile {
+  height: auto;
+  margin-inline-start: 2rem;
+  margin-top: 2rem;
+}
+
+.logo {
+  /* margin-inline-start: 2rem; */
+  flex-grow: 0;
+  /* margin-inline-end: auto; */
+}
+
+.menu {
+  min-width: 55vw;
+  height: 100%;
+  padding-inline: 4vw;
+  background-color: var(--menu-background-color);
+  backdrop-filter: blur(8px);
+  flex-grow: 1;
+  justify-self: end;
+}
+
+.menu.tablet {
+  /* padding-inline: 3vw; */
+}
+
+.toggler {
+  /* display: hidden; */
+  width: 2rem;
+  margin-inline-end: 2rem;
+  background-color: transparent;
+  border: none;
+}
+
+.decoration-line {
+  position: relative;
+  height: 0;
+  flex-grow: 1;
+  /* width: 100%; */
+  border-block: 1px solid grey;
+  margin-inline-start: 5vw;
+  margin-inline-end: -3vw;
+  z-index: 1;
+  background-color: var(--menu-background-color);
+}

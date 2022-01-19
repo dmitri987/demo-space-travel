@@ -44,6 +44,7 @@ export const createPage = ({
       <Navs items={navbarItems} />
       <Navs items={navbarItems} tabs />
       <Navs items={navbarItems} bullets />
+      <Navs items={navbarItems} background />
     </Page>
   );
 };

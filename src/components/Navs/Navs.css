@@ -1,40 +1,90 @@
+/* @import url(../../index.css); */
+/* @import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed&family=Bellefair&display=swap"); */
+
+:root {
+  /* --color-white: 255 255 255;
+  --color-gray: 208 214 249;
+  --color-black: 11 13 23; */
+
+  --margin-block: 0.5rem;
+  --underline-width: 2px;
+  --transition-duration: 0.2s;
+}
+
+/* nav * {
+  font-family: "Barlow Condensed", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  text-transform: uppercase;
+} */
+
+nav {
+  display: flex;
+  place-content: center;
+  max-width: fit-content;
+  min-height: 100%;
+  /* max-width: 55%; */
+}
+
+/* nav.background {
+  background-color: rgba(256 256 256 / 20%);
+  backdrop-filter: blur(8px);
+} */
+
+nav.vertical {
+  justify-content: start;
+  padding: 2rem;
+}
+
+nav.vertical > ul {
+  flex-direction: column;
+  align-items: start;
+  gap: 0;
+}
+
 nav > ul {
   display: flex;
+  align-items: center;
   gap: 1.5rem;
   max-width: fit-content;
-  counter-reset: counter;
+  height: 100%;
+  margin-inline: 0;
+  padding-inline: 3rem;
 }
 
 nav li {
-  --margin-block: 0.5rem;
-  --underline-width: 2px;
-  --transition-duration: 0.5s;
   display: flex;
   margin-inline: 0;
-  /* padding-block: var(--margin-block); */
+  padding-inline: 0.25rem;
+  padding-block: var(--margin-block);
   color: rgb(var(--color-white));
   border-bottom: 0px solid rgb(var(--color-black));
   text-decoration: none;
-  cursor: pointer;
   list-style: none;
   place-content: center;
   /* transition: all var(--transition-duration) ease-in-out; */
 }
 
-nav li > a {
+nav li > :where(a, button) {
+  display: flex;
+  place-content: center;
+  padding: 0;
   width: 100%;
   height: 100%;
   border-radius: inherit;
-  transition: all var(--transition-duration) ease-in-out;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 nav li > * {
-  padding-block: calc(var(--margin-block) + var(--underline-width));
+  /* padding-block: calc(var(--margin-block) + var(--underline-width)); */
   font-size: 16px;
   line-height: 19px;
   letter-spacing: 2.7px;
   color: rgb(var(--color-white));
   text-decoration: none;
+  transition: all var(--transition-duration) ease-in-out;
 }
 
 .tabs li * {
@@ -70,10 +120,10 @@ nav li.active {
   border: 2px solid rgba(var(--color-white) / 30%);
 }
 
-.rounds li a {
+/* .rounds li a {
   display: flex;
   place-content: center;
-}
+} */
 
 .rounds li .number {
   padding: 0;
@@ -110,7 +160,7 @@ nav li.active {
   padding: 0;
 }
 
-.bullets li a {
+.bullets li :where(a, button) {
   width: 15px;
   height: 15px;
   padding: 0;
@@ -125,14 +175,14 @@ nav li.active {
   background-color: rgba(var(--color-white));
 }
 
-.bullets a:hover {
+.bullets :where(a, button):hover {
   background-color: rgba(var(--color-white) / 60%);
   /* border-color: rgba(var(--color-white) / 60%); */
   /* outline: none;
   border: none; */
 }
 
-.bullets a:focus-visible {
+.bullets :where(a, button):focus-visible {
   background-color: rgba(var(--color-white) / 60%);
   /* outline: white solid 2px;
   outline-offset: 1px; */

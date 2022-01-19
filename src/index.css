@@ -20,6 +20,7 @@
 }
 body {
   margin: 0;
+  padding: 0 !important;
 }
 
 /** TYPOGRAPHY **/
@@ -69,7 +70,7 @@ h6 {
 h5,
 .subheading1,
 .subheading2,
-nav {
+nav * {
   font-family: "Barlow Condensed", sans-serif;
   font-style: normal;
   font-weight: normal;
