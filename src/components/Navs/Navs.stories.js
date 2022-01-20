@@ -13,7 +13,11 @@ const items = [
   { title: "venus", url: "#venus" },
 ];
 
-const Template = (args) => <Navs {...args} />;
+const Template = (args) => (
+  <div style={{ margin: "3rem", height: "5rem", width: "80%" }}>
+    <Navs {...args} />;
+  </div>
+);
 
 export const Navigations = Template.bind({});
 Navigations.args = {

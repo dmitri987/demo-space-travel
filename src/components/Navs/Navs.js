@@ -58,7 +58,7 @@ export const createNavs = (LinkComponent) => {
 TODO:
   vertical
   set active item from current url
-  remove ul/li ??
+  remove li ??
   animate only <a>
   Styling:
     --margin-block
@@ -96,31 +96,29 @@ TODO:
 
     return (
       <nav className={classes}>
-        <ul>
-          {items.map(({ title, url }, index) => (
-            <Item
-              isActive={active === index}
-              url={url}
-              key={title}
-              onClick={setActiveItem}
-            >
-              {rounds ? (
-                <span className="number">{index}</span>
-              ) : bullets ? (
-                <span>&nbsp;&nbsp;</span>
-              ) : (
-                <Fragment>
-                  {!tabs && (
-                    <span className="number">
-                      {(index < 9 ? "0" : "") + (index + 1)}
-                    </span>
-                  )}
-                  <span className="title">{title}</span>
-                </Fragment>
-              )}
-            </Item>
-          ))}
-        </ul>
+        {items.map(({ title, url }, index) => (
+          <Item
+            isActive={active === index}
+            url={url}
+            key={title}
+            onClick={setActiveItem}
+          >
+            {rounds ? (
+              <span className="number">{index}</span>
+            ) : bullets ? (
+              <span>&nbsp;&nbsp;</span>
+            ) : (
+              <span>
+                {!tabs && (
+                  <span className="number">
+                    {(index < 9 ? "0" : "") + (index + 1)}
+                  </span>
+                )}
+                <span className="title">{title}</span>
+              </span>
+            )}
+          </Item>
+        ))}
       </nav>
     );
   };

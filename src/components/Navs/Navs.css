@@ -21,8 +21,10 @@
 nav {
   display: flex;
   place-content: center;
+  align-items: center;
+  gap: 1.5rem;
   max-width: fit-content;
-  min-height: 100%;
+  height: 100%;
   /* max-width: 55%; */
 }
 
@@ -34,14 +36,20 @@ nav {
 nav.vertical {
   justify-content: start;
   padding: 2rem;
-}
-
-nav.vertical > ul {
   flex-direction: column;
   align-items: start;
-  gap: 0;
+  gap: 1rem;
+  max-width: 100%;
+  height: 100%;
 }
 
+nav.vertical li {
+  padding-block: 1rem;
+  justify-content: start;
+  width: 100%;
+}
+
+/* 
 nav > ul {
   display: flex;
   align-items: center;
@@ -50,15 +58,19 @@ nav > ul {
   height: 100%;
   margin-inline: 0;
   padding-inline: 3rem;
-}
+} */
 
 nav li {
   display: flex;
+  height: 100%;
   margin-inline: 0;
   padding-inline: 0.25rem;
-  padding-block: var(--margin-block);
+  padding-block: 0;
+  margin-block: 0;
+  align-items: center;
+  /* padding-block: var(--margin-block); */
   color: rgb(var(--color-white));
-  border-bottom: 0px solid rgb(var(--color-black));
+  border-bottom: var(--underline-width) solid transparent;
   text-decoration: none;
   list-style: none;
   place-content: center;
@@ -79,12 +91,19 @@ nav li > :where(a, button) {
 
 nav li > * {
   /* padding-block: calc(var(--margin-block) + var(--underline-width)); */
+  width: fit-content;
+  height: fit-content;
   font-size: 16px;
   line-height: 19px;
   letter-spacing: 2.7px;
   color: rgb(var(--color-white));
   text-decoration: none;
-  transition: all var(--transition-duration) ease-in-out;
+  transition: border var(--transition-duration) ease-in-out;
+}
+
+nav li > *:focus-visible {
+  outline: 2px solid rgba(var(--color-white) / 60%);
+  outline-offset: 4px;
 }
 
 .tabs li * {
@@ -102,12 +121,20 @@ nav li.active {
   cursor: default;
 }
 
-:where(.navs, .tabs) li.active {
+:where(.navs, .tabs):not(.vertical) li.active {
   border-block-end: var(--underline-width) solid rgb(var(--color-white));
 }
 
-:where(.navs, .tabs) li:not(.active):hover {
+:where(.navs, .tabs):not(.vertical) li:not(.active):hover {
   border-block-end: var(--underline-width) solid rgba(var(--color-white) / 50%);
+}
+
+:where(.navs, .tabs).vertical li.active {
+  border-inline-end: 4px solid rgb(var(--color-white));
+}
+
+:where(.navs, .tabs).vertical li:not(.active):hover {
+  border-inline-end: 4px solid rgba(var(--color-white) / 50%);
 }
 
 .rounds li {
@@ -118,6 +145,11 @@ nav li.active {
   border-radius: 50%;
   place-content: center;
   border: 2px solid rgba(var(--color-white) / 30%);
+}
+
+.rounds li > :is(a, button) {
+  width: 100%;
+  height: 100%;
 }
 
 /* .rounds li a {
@@ -149,11 +181,17 @@ nav li.active {
   border: 2px solid rgba(var(--color-white));
 }
 
+nav li > *:focus-visible {
+  /* outline: 2px solid rgba(var(--color-white) / 60%); */
+  outline-offset: 0;
+}
+
 .bullets li {
   display: flex;
   place-content: center;
   width: 15px;
-  aspect-ratio: 1;
+  height: 15px;
+  /* aspect-ratio: 1; */
   border-radius: 50%;
   border: none;
   overflow: hidden;
