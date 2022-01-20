@@ -73,6 +73,7 @@ TODO:
     background,
     vertical,
     className,
+    startingIndex,
   }) {
     // console.log(items);
     const [active, setActive] = useState(0);
@@ -81,6 +82,8 @@ TODO:
       const index = [...item.parentElement.children].indexOf(item);
       setActive(index);
     };
+
+    const startIndex = startingIndex ?? 0;
 
     let classes = tabs
       ? "tabs"
@@ -111,7 +114,7 @@ TODO:
               <span>
                 {!tabs && (
                   <span className="number">
-                    {(index < 9 ? "0" : "") + (index + 1)}
+                    {(index + startIndex < 9 ? "0" : "") + (index + startIndex)}
                   </span>
                 )}
                 <span className="title">{title}</span>

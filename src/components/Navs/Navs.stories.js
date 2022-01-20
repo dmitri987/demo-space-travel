@@ -22,6 +22,7 @@ const Template = (args) => (
 export const Navigations = Template.bind({});
 Navigations.args = {
   items,
+  startingIndex: 1,
 };
 
 export const Tabs = Template.bind({});

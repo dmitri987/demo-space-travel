@@ -34,17 +34,64 @@
 }
 
 .menu {
-  min-width: 55vw;
+  width: 100%;
   height: 100%;
-  padding-inline: 6vw;
-  background-color: var(--menu-background-color);
-  backdrop-filter: blur(8px);
+}
+
+.panel-with-toggler.inline .menu {
+  padding-inline: 8vw;
   flex-grow: 1;
   justify-self: end;
 }
 
-.menu.tablet {
-  /* padding-inline: 3vw; */
+.panel-with-toggler .menu {
+  padding-inline-end: 0;
+}
+
+.panel-with-toggler.inline {
+  height: 100%;
+}
+
+.panel-with-toggler.inline .panel {
+  height: 100%;
+}
+
+.panel-with-toggler.inline .close-button {
+  display: none;
+}
+
+.panel-with-toggler.inline .toggler {
+  display: none;
+}
+
+.panel {
+  display: flex;
+  background-color: var(--menu-background-color);
+  backdrop-filter: blur(8px);
+  transition: all 0.25s ease-in-out;
+}
+
+.panel-with-toggler:not(.inline) .panel.show {
+  inset-inline-end: 0;
+}
+
+.panel-with-toggler:not(.inline) .panel {
+  --width: 254px;
+  flex-direction: column;
+  position: fixed;
+  width: var(--width);
+  inset-block: 0;
+  inset-inline-end: calc(-1 * var(--width));
+
+  z-index: 10;
+}
+
+.close-button {
+  width: 1.5rem;
+  height: 1.5rem;
+  align-self: end;
+  margin: 1.5rem;
+  cursor: pointer;
 }
 
 .toggler {
@@ -53,7 +100,20 @@
   margin-inline-end: 2rem;
   background-color: transparent;
   border: none;
+  cursor: pointer;
 }
+
+.backdrop {
+  /* display: none; */
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+}
+
+/* :not(.inline) .panel.show .backdrop {
+  display: block;
+  background: red;
+} */
 
 .decoration-line {
   position: relative;

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Navs from "../Navs/Navs";
 import "./NavBar.css";
 import logo from "./icons/favicon.svg";
 import sandwich from "./icons/sandwich.svg";
+import closeButton from "./icons/close.svg";
 // import styled from "styled-components";
 
 /**
@@ -13,40 +14,51 @@ import sandwich from "./icons/sandwich.svg";
  * @returns
  */
 
-const toggleNavPanel = () => {
-  console.log("toggle");
-};
-
-const Toggler = () => (
-  <img
-    className="toggler"
-    onClick={toggleNavPanel}
-    src={sandwich}
-    alt="toggle menu"
-  />
-
-  // <button className="toggler" onClick={toggleNavPanel}>
-  // </button>
+const Toggler = ({ onClick }) => (
+  <img className="toggler" onClick={onClick} src={sandwich} alt="toggle menu" />
 );
 
-const NavBar = ({ menuItems, MenuComponent, tablet, mobile }) => {
+const NavPanel = ({ items, MenuComponent, inline }) => {
   const Menu = MenuComponent ?? Navs;
+  const [show, setShow] = useState(false);
+  const togglePanel = () => setShow(!show);
+
+  return (
+    <div className={"panel-with-toggler" + (inline ? " inline" : "")}>
+      <Toggler onClick={togglePanel} />
+      <div className={"panel" + (show ? " show" : "")}>
+        <img
+          className="close-button"
+          onClick={togglePanel}
+          src={closeButton}
+          aria-hidden="true"
+          alt=""
+        />
+        <Menu className="menu" items={items} vertical={!inline} />
+      </div>
+      {!inline && show && (
+        <div className="backdrop" onClick={togglePanel}></div>
+      )}
+    </div>
+  );
+};
+
+const NavBar = ({ menuItems, MenuComponent, tablet, mobile }) => {
   console.log("NavBar");
   const size = mobile ? " mobile" : tablet ? " tablet" : " desktop";
+  const desktop = !(tablet || mobile);
 
   return (
     <div className={"navbar" + size}>
       <a className="logo" href="/">
         <img src={logo} alt="go home" />
       </a>
-      {!mobile && <div className="decoration-line"></div>}
-      {mobile ? (
-        <Toggler />
-      ) : tablet ? (
-        <Menu className="menu tablet" items={menuItems} tabs />
-      ) : (
-        <Menu className="menu" items={menuItems} />
-      )}
+      {desktop && <div className="decoration-line"></div>}
+      <NavPanel
+        items={menuItems}
+        MenuComponent={MenuComponent}
+        inline={!mobile}
+      />
     </div>
   );
 };
