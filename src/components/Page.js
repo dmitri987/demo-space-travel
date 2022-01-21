@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 // import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
-import Navs from "./Navs/Navs";
+import NavBar from "./NavBar/NavBar";
+import data from "../data.json";
+import { useViewportResizedWidth } from "../helpers";
 
 const setBackgroundImageUrl = (url, maxWidth = null) => {
   if (!url) return;
@@ -18,12 +20,12 @@ const setBackgroundImageUrl = (url, maxWidth = null) => {
 };
 
 export const createPage = ({
-  pageName,
   bgImageDesktop,
   bgImageTablet,
   bgImageMobile,
-  navbarItems,
 }) => {
+  const { desktop, tablet } = data.breakpoints;
+
   const Page = styled.div`
     display: flow-root;
     min-height: 100vh;
@@ -31,20 +33,25 @@ export const createPage = ({
     background-position: center center;
 
     ${setBackgroundImageUrl(bgImageDesktop)}
-    ${setBackgroundImageUrl(bgImageTablet, "1024px")}
-    ${setBackgroundImageUrl(bgImageMobile, "750px")}
+    ${setBackgroundImageUrl(bgImageTablet, desktop + "px")}
+    ${setBackgroundImageUrl(bgImageMobile, tablet + "px")}
   `;
 
-  console.log(navbarItems);
+  return ({ children }) => {
+    const [viewportWidth, setViewportWidth] = useState();
+    useViewportResizedWidth(setViewportWidth);
 
-  return () => (
-    <Page>
-      <h3 style={{ color: "white" }}>{pageName}</h3>
-      <Navs items={navbarItems} rounds />
-      <Navs items={navbarItems} />
-      <Navs items={navbarItems} tabs />
-      <Navs items={navbarItems} bullets />
-      <Navs items={navbarItems} background />
-    </Page>
-  );
+    const styles = {
+      mobile: viewportWidth < tablet,
+      tablet: viewportWidth < desktop,
+      desktop: viewportWidth >= desktop,
+    };
+
+    return (
+      <Page>
+        <NavBar menuItems={data.navBar} {...styles} />
+        {children}
+      </Page>
+    );
+  };
 };

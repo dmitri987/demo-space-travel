@@ -14,6 +14,10 @@
   --color-white: 255 255 255;
   --color-gray: 208 214 249;
   --color-black: 11 13 23;
+
+  /** BREAKPOINTS **/
+  --tablet: 750px;
+  --desktop: 1024px;
 }
 * {
   box-sizing: border-box;

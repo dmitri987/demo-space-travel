@@ -3,7 +3,6 @@ import HomePage from "./components/Home/HomePage";
 import "./App.css";
 
 // const HomePage = createPage({ pageName: "home" });
-console.log(HomePage);
 
 function App() {
   return (

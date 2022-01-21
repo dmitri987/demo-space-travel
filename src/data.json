@@ -1,0 +1,12 @@
+{
+  "breakpoints": {
+    "desktop": 1024,
+    "tablet": 750
+  },
+  "navBar": [
+    { "title": "home", "url": "/" },
+    { "title": "destination", "url": "/destination" },
+    { "title": "crew", "url": "/crew" },
+    { "title": "technology", "url": "/technology" }
+  ]
+}

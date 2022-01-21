@@ -18,13 +18,13 @@ const Toggler = ({ onClick }) => (
   <img className="toggler" onClick={onClick} src={sandwich} alt="toggle menu" />
 );
 
-const NavPanel = ({ items, MenuComponent, inline }) => {
+const NavPanel = ({ items, MenuComponent, tablet, mobile }) => {
   const Menu = MenuComponent ?? Navs;
   const [show, setShow] = useState(false);
   const togglePanel = () => setShow(!show);
 
   return (
-    <div className={"panel-with-toggler" + (inline ? " inline" : "")}>
+    <div className={"panel-with-toggler" + (!mobile ? " inline" : "")}>
       <Toggler onClick={togglePanel} />
       <div className={"panel" + (show ? " show" : "")}>
         <img
@@ -34,17 +34,14 @@ const NavPanel = ({ items, MenuComponent, inline }) => {
           aria-hidden="true"
           alt=""
         />
-        <Menu className="menu" items={items} vertical={!inline} />
+        <Menu className="menu" items={items} vertical={mobile} tabs={tablet} />
       </div>
-      {!inline && show && (
-        <div className="backdrop" onClick={togglePanel}></div>
-      )}
+      {mobile && show && <div className="backdrop" onClick={togglePanel}></div>}
     </div>
   );
 };
 
 const NavBar = ({ menuItems, MenuComponent, tablet, mobile }) => {
-  console.log("NavBar");
   const size = mobile ? " mobile" : tablet ? " tablet" : " desktop";
   const desktop = !(tablet || mobile);
 
@@ -57,7 +54,8 @@ const NavBar = ({ menuItems, MenuComponent, tablet, mobile }) => {
       <NavPanel
         items={menuItems}
         MenuComponent={MenuComponent}
-        inline={!mobile}
+        tablet={tablet}
+        mobile={mobile}
       />
     </div>
   );
