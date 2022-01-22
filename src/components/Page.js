@@ -20,6 +20,7 @@ const setBackgroundImageUrl = (url, maxWidth = null) => {
 };
 
 export const createPage = ({
+  title,
   bgImageDesktop,
   bgImageTablet,
   bgImageMobile,
@@ -38,7 +39,8 @@ export const createPage = ({
   `;
 
   return ({ children }) => {
-    const [viewportWidth, setViewportWidth] = useState();
+    // const viewportWidth = window.innerWidth;
+    const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
     useViewportResizedWidth(setViewportWidth);
 
     const styles = {
@@ -49,7 +51,7 @@ export const createPage = ({
 
     return (
       <Page>
-        <NavBar menuItems={data.navBar} {...styles} />
+        <NavBar menuItems={data.navBar} {...styles} activeItem={title} />
         {children}
       </Page>
     );

@@ -18,7 +18,7 @@ const Toggler = ({ onClick }) => (
   <img className="toggler" onClick={onClick} src={sandwich} alt="toggle menu" />
 );
 
-const NavPanel = ({ items, MenuComponent, tablet, mobile }) => {
+const NavPanel = ({ items, MenuComponent, tablet, mobile, activeItem }) => {
   const Menu = MenuComponent ?? Navs;
   const [show, setShow] = useState(false);
   const togglePanel = () => setShow(!show);
@@ -34,14 +34,20 @@ const NavPanel = ({ items, MenuComponent, tablet, mobile }) => {
           aria-hidden="true"
           alt=""
         />
-        <Menu className="menu" items={items} vertical={mobile} tabs={tablet} />
+        <Menu
+          className="menu"
+          items={items}
+          vertical={mobile}
+          tabs={tablet}
+          activeItem={activeItem}
+        />
       </div>
       {mobile && show && <div className="backdrop" onClick={togglePanel}></div>}
     </div>
   );
 };
 
-const NavBar = ({ menuItems, MenuComponent, tablet, mobile }) => {
+const NavBar = ({ menuItems, MenuComponent, tablet, mobile, activeItem }) => {
   const size = mobile ? " mobile" : tablet ? " tablet" : " desktop";
   const desktop = !(tablet || mobile);
 
@@ -56,6 +62,7 @@ const NavBar = ({ menuItems, MenuComponent, tablet, mobile }) => {
         MenuComponent={MenuComponent}
         tablet={tablet}
         mobile={mobile}
+        activeItem={activeItem}
       />
     </div>
   );

@@ -71,7 +71,7 @@ nav li {
   margin-block: 0;
   align-items: center;
   /* padding-block: var(--margin-block); */
-  color: rgb(var(--color-white));
+  /* color: rgb(var(--color-white)); */
   border-bottom: var(--underline-width) solid transparent;
   text-decoration: none;
   list-style: none;
@@ -102,7 +102,7 @@ nav li > * {
   font-size: 16px;
   line-height: 19px;
   letter-spacing: 2.7px;
-  color: rgb(var(--color-white));
+  /* color: rgb(var(--color-white)); */
   background-color: transparent;
   border: none;
   text-decoration: none;
@@ -181,7 +181,7 @@ nav li.active {
 }
 
 .rounds li.active {
-  color: rgba(var(--color-black));
+  color: rgba(var(--color-black)) !important;
   background-color: rgba(var(--color-white));
   border: 2px solid rgba(var(--color-white));
 }

@@ -1,5 +1,5 @@
 :root {
-  --menu-background-color: rgba(256 256 256 / 20%);
+  --menu-background-color: rgba(256 256 256 / 10%);
 }
 
 .navbar {
@@ -67,7 +67,7 @@
 .panel {
   display: flex;
   background-color: var(--menu-background-color);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(30px);
   transition: all 0.25s ease-in-out;
 }
 

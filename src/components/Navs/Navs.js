@@ -1,5 +1,6 @@
 import React, { useState, Fragment } from "react";
 import { NavLink, Link } from "react-router-dom";
+import styled from "styled-components";
 // import styled from "styled-components";
 import "./Navs.css";
 
@@ -32,10 +33,16 @@ a.
 // </Link>
 // )
 
+const Text = styled.h5`
+  font-size: 16px;
+  line-height: 19px;
+  letter-spacing: 2.7px;
+`;
+
 const DefaultLinkComponent = ({ url, children, onClick }) => (
-  <Link to={url} onClick={onClick}>
+  <NavLink to={url} onClick={onClick}>
     {children}
-  </Link>
+  </NavLink>
 );
 
 const MockLinkComponent = ({ children, onClick }) => (
@@ -45,9 +52,9 @@ const MockLinkComponent = ({ children, onClick }) => (
 export const createNavs = (LinkComponent) => {
   const Item = ({ isActive, url, onClick, children }) =>
     isActive ? (
-      <li className="active">{children}</li>
+      <li className="active text-white">{children}</li>
     ) : (
-      <li>
+      <li className="text-gray">
         <LinkComponent url={url} onClick={onClick}>
           {children}
         </LinkComponent>
@@ -74,14 +81,28 @@ TODO:
     vertical,
     className,
     startingIndex,
+    style,
+    activeItem,
   }) {
     // console.log(items);
-    const [active, setActive] = useState(0);
-    const setActiveItem = (event) => {
-      const item = event.target.closest("li"); // TODO: change it if don't use ul/li
-      const index = [...item.parentElement.children].indexOf(item);
-      setActive(index);
-    };
+    const active =
+      typeof activeItem === "string"
+        ? Math.max(
+            items.findIndex(
+              (item) =>
+                item.title.toLowerCase() === activeItem.toLowerCase() ||
+                item.url.toLowerCase() === activeItem.toLowerCase()
+            ),
+            0
+          )
+        : activeItem ?? 0;
+
+    // const [active, setActive] = useState(activeItem ?? 0);
+    // const setActiveItem = (event) => {
+    //   const item = event.target.closest("li"); // TODO: change it if don't use ul/li
+    //   const index = [...item.parentElement.children].indexOf(item);
+    //   setActive(index);
+    // };
 
     const startIndex = startingIndex ?? 0;
 
@@ -98,27 +119,29 @@ TODO:
     if (className) classes += ` ${className}`;
 
     return (
-      <nav className={classes}>
+      <nav className={classes} style={style}>
         {items.map(({ title, url }, index) => (
           <Item
             isActive={active === index}
             url={url}
             key={title}
-            onClick={setActiveItem}
+            // onClick={setActiveItem}
           >
             {rounds ? (
-              <span className="number">{index}</span>
+              <Text>
+                <span className="number">{index}</span>
+              </Text>
             ) : bullets ? (
               <span>&nbsp;&nbsp;</span>
             ) : (
-              <span>
+              <Text>
                 {!tabs && (
                   <span className="number">
                     {(index + startIndex < 9 ? "0" : "") + (index + startIndex)}
                   </span>
                 )}
                 <span className="title">{title}</span>
-              </span>
+              </Text>
             )}
           </Item>
         ))}

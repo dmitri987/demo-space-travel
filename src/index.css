@@ -27,6 +27,17 @@ body {
   padding: 0 !important;
 }
 
+/** UTILITIES **/
+.text-white {
+  color: rgba(var(--color-white)) !important;
+}
+.text-gray {
+  color: rgba(var(--color-gray)) !important;
+}
+.text-black {
+  color: rgba(var(--color-black)) !important;
+}
+
 /** TYPOGRAPHY **/
 h1,
 h2,
@@ -34,6 +45,7 @@ h3,
 h4,
 h6,
 p {
+  margin-block: 0;
   font-family: "Bellefair", serif;
   font-style: normal;
   font-weight: normal;
@@ -67,6 +79,7 @@ h4 {
 
 p,
 h6 {
+  font-family: "Barlow", sans-serif;
   font-size: 18px;
   line-height: 32px;
 }
@@ -75,6 +88,7 @@ h5,
 .subheading1,
 .subheading2,
 nav * {
+  margin-block: 0;
   font-family: "Barlow Condensed", sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -90,6 +104,7 @@ h5 {
 .subheading1 {
   font-size: 28px;
   line-height: 32px;
+  font-family: "Bellefair", serif;
 }
 
 .subheading2 {
@@ -98,53 +113,55 @@ h5 {
   letter-spacing: 2.3625px;
 }
 
-/**  COMPONENTS **/
-/* NAVIGATION/TABS */
-/* nav > * {
-  display: flex;
-  gap: 1.5rem;
-  max-width: fit-content;
-  counter-reset: counter;
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 150px;
+    line-height: 150px;
+  }
+
+  h5 {
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 3.375px;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 28px;
+  }
 }
 
-nav li {
-  font-size: 16px;
-  line-height: 19px;
-  letter-spacing: 2.7px;
+@media (max-width: 750px) {
+  h1 {
+    font-size: 80px;
+    line-height: 100px;
+  }
+
+  h4 {
+    font-size: 20px;
+    line-height: 23px;
+  }
+
+  h5 {
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: 2.7px;
+  }
+
+  p {
+    font-size: 15px;
+    line-height: 25px;
+  }
 }
 
-.tabs li {
-  display: inline;
-  margin-inline: 0;
-  margin-block-end: 0.5rem;
-  padding-bottom: 0.5rem;
-  cursor: pointer;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+button {
+  color: inherit;
 }
-
-.tabs li * {
-  font-size: 16px;
-  line-height: 19px;
-  letter-spacing: 2.7px;
-  color: rgb(var(--color-white));
-  text-decoration: none;
-}
-
-.tabs.numbered li::before {
-  counter-increment: counter;
-  content: counter(counter, decimal-leading-zero);
-  margin-inline-end: 0.5rem;
-  font-weight: bold;
-  color: rgb(var(--color-white));
-  list-style-position: inside;
-}
-
-.tabs li.active {
-  border-block-end: 2px solid rgb(var(--color-white));
-  cursor: default;
-}
-
-.tabs li:not(.active):hover {
-  border-block-end: 2px solid rgba(var(--color-white) / 50%);
-} */
-
-/** COMPONENTS **/

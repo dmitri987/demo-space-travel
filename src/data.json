@@ -8,5 +8,11 @@
     { "title": "destination", "url": "/destination" },
     { "title": "crew", "url": "/crew" },
     { "title": "technology", "url": "/technology" }
+  ],
+  "destinations": [
+    { "title": "moon", "url": "#moon"},
+    { "title": "mars", "url": "#mars"},
+    { "title": "europa", "url": "#europa"},
+    { "title": "titan", "url": "#titan"}
   ]
 }
