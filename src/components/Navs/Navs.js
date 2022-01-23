@@ -124,7 +124,7 @@ TODO:
           <Item
             isActive={active === index}
             url={url}
-            key={title}
+            key={url}
             // onClick={setActiveItem}
           >
             {rounds ? (

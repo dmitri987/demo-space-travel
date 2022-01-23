@@ -8,7 +8,7 @@ import bgImageMobile from "./bg-home-mobile.jpg";
 import data from "../../data.json";
 
 const Page = createPage({
-  title: "home",
+  activePageIndex: 0,
   bgImageDesktop,
   bgImageTablet,
   bgImageMobile,

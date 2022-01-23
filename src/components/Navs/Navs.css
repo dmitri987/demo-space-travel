@@ -43,7 +43,7 @@ nav.vertical {
   height: 100%;
 }
 
-nav.vertical li {
+nav.vertical:not(.rounds) li {
   padding-block: 1rem;
   justify-content: start;
   width: 100%;
@@ -149,6 +149,7 @@ nav li.active {
 .rounds li {
   display: flex;
   width: 80px;
+  height: 80px;
   aspect-ratio: 1;
   padding: 0;
   border-radius: 50%;
@@ -156,7 +157,27 @@ nav li.active {
   border: 2px solid rgba(var(--color-white) / 30%);
 }
 
+@media (max-width: 1024px) {
+  .rounds li {
+    width: 58px;
+    height: 58px;
+  }
+}
+
+@media (max-width: 750px) {
+  .rounds li {
+    width: 48px;
+    height: 48px;
+    font-size: 16px;
+    line-height: 18px;
+    letter-spacing: 1px;
+  }
+}
+
 .rounds li > :is(a, button) {
+  display: flex;
+  place-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
 }

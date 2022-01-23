@@ -13,7 +13,8 @@ import titanImage from "./titan.png";
 import data from "../../data.json";
 
 const Page = createPage({
-  title: "destination",
+  activePageIndex: 1,
+  heading: "pick your destination",
   bgImageDesktop,
   bgImageTablet,
   bgImageMobile,
@@ -22,25 +23,16 @@ const Page = createPage({
 const tablet = data.breakpoints.tablet + "px";
 const desktop = data.breakpoints.desktop + "px";
 
-const StyledTitle = styled.h5`
-  text-align: start;
-  margin-top: 3rem;
-  margin-bottom: 3rem;
-  margin-inline-start: 3rem;
-`;
-
-const Title = () => (
-  <StyledTitle className="text-white">
-    <span style={{ opacity: 0.25, marginInlineEnd: "1.5rem" }}>01</span>
-    <span>PICK YOUR DESTINATION</span>
-  </StyledTitle>
-);
+/**
+ * TODO:
+ *  put planets in data.json ?
+ */
 
 const Content = styled.div`
   display: grid;
   grid-template-columns: 1fr 27rem;
   height: 100%;
-  margin-top: 4rem;
+  /* margin-top: 4rem; */
   margin-inline: 10vw;
   justify-content: space-between;
   text-align: start;
@@ -52,6 +44,7 @@ const Content = styled.div`
     justify-items: center;
     justify-content: center;
     text-align: center;
+    gap: 1rem;
   }
 `;
 
@@ -59,10 +52,13 @@ const Info = styled.div`
   display: grid;
   gap: 2rem;
   justify-items: start;
+  align-content: start;
   text-align: inherit;
 
   @media (max-width: ${desktop}) {
     justify-items: center;
+    align-content: start;
+    gap: 1rem;
   }
 `;
 
@@ -152,7 +148,6 @@ const Destination = () => {
 
   return (
     <Page>
-      <Title />
       <Content>
         <Image src={image} alt="" />
         <Info>
