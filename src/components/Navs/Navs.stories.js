@@ -1,10 +1,13 @@
 import React from "react";
-import { TabsWithIndices as Navs, Tabs, Bullets, Rounds, mocked } from "./Navs";
+import { mocked } from "./BaseNavs";
+import _Navs from "./Navs";
+import _Tabs from "./Tabs";
+import _Bullets from "./Bullets";
+import _Rounds from "./Rounds";
 import "../../index.css";
 
 export default {
   title: "Navs",
-  component: Navs,
 };
 
 const items = [
@@ -19,32 +22,39 @@ const items = [
 //   </div>
 // );
 
-const MockNavs = mocked(Navs);
-export const TabsWithIndices = () => (
+const MockNavs = mocked(_Navs);
+export const Navs = (args) => (
+  <div style={{ margin: "1rem" }}>
+    <small className="text-gray">
+      Resize viewport to see how it looks on different screen sizes
+    </small>
+    <div style={{ margin: "5rem", height: "5rem", width: "20rem" }}>
+      <MockNavs {...args} items={items} indexed />;
+    </div>
+  </div>
+);
+Navs.args = {
+  vertical: false,
+};
+
+const MockTabs = mocked(_Tabs);
+export const Tabs = (args) => (
   <div style={{ margin: "1rem" }}>
     <small className="text-gray">
       Resize viewport to see how it looks on different screen sizes
     </small>
     <div style={{ margin: "3rem", height: "5rem", width: "80%" }}>
-      <MockNavs items={items} />;
+      <MockTabs {...args} items={items} />;
     </div>
   </div>
 );
+Tabs.args = {
+  indexed: false,
+  vertical: false,
+};
 
-const MockTabs = mocked(Tabs);
-export const TabsWithoutIndices = () => (
-  <div style={{ margin: "1rem" }}>
-    <small className="text-gray">
-      Resize viewport to see how it looks on different screen sizes
-    </small>
-    <div style={{ margin: "3rem", height: "5rem", width: "80%" }}>
-      <MockTabs items={items} />;
-    </div>
-  </div>
-);
-
-const MockBullets = mocked(Bullets);
-export const BulletedTabs = () => (
+const MockBullets = mocked(_Bullets);
+export const Bullets = () => (
   <div style={{ margin: "1rem" }}>
     <small className="text-gray">
       Resize viewport to see how it looks on different screen sizes
@@ -55,8 +65,8 @@ export const BulletedTabs = () => (
   </div>
 );
 
-const MockRounds = mocked(Rounds);
-export const RoundedTabs = () => (
+const MockRounds = mocked(_Rounds);
+export const Rounds = ({ vertical }) => (
   <div style={{ margin: "1rem" }}>
     <small
       className="text-gray"
@@ -65,16 +75,34 @@ export const RoundedTabs = () => (
       Resize viewport to see how it looks on different screen sizes
     </small>
     <h5 className="text-white">Horizontal:</h5>
-    <div style={{ margin: "3rem", height: "5rem", width: "80%" }}>
-      <MockRounds items={items} />;
+    <div
+      style={{
+        margin: "3rem",
+        height: "5rem",
+        width: "80%",
+        marginLeft: "15rem",
+      }}
+    >
+      <MockRounds items={items} style={{ width: "fit-content" }} />;
     </div>
 
     <h5 className="text-white">Vertical:</h5>
-    <div style={{ margin: "2rem auto", width: "50vw" }}>
-      <MockRounds items={items} style={{ flexDirection: "column" }} />;
+    <div
+      style={{
+        margin: "2rem auto auto 15rem",
+        width: "50vw",
+        display: "grid",
+        justifyContent: "start",
+      }}
+    >
+      <MockRounds items={items} vertical={vertical} />;
+      {/* <MockRounds items={items} style={{ flexDirection: "column" }} />; */}
     </div>
   </div>
 );
+Rounds.args = {
+  vertical: true,
+};
 
 // export const Rounds = Template.bind({});
 // Rounds.args = {

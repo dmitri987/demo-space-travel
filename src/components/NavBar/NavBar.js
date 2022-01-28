@@ -4,15 +4,6 @@ import "./NavBar.css";
 import logo from "./icons/favicon.svg";
 import sandwich from "./icons/sandwich.svg";
 import closeButton from "./icons/close.svg";
-// import styled from "styled-components";
-
-/**
- * breakpoints:
- *
- *
- * @param {*} param0
- * @returns
- */
 
 const Toggler = ({ onClick }) => (
   <img className="toggler" onClick={onClick} src={sandwich} alt="toggle menu" />
@@ -38,7 +29,7 @@ const NavPanel = ({ items, MenuComponent, tablet, mobile, activeItem }) => {
           className="menu"
           items={items}
           vertical={mobile}
-          tabs={tablet}
+          indexed={!tablet}
           activeItem={activeItem}
         />
       </div>

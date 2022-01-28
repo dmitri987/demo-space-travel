@@ -10,8 +10,8 @@ const StyledButton = styled.button`
   height: 274px;
   border-radius: 50%;
   border: none;
-  outline: 0 solid rgba(var(--color-gray) / 10%);
-  background: rgba(var(--color-white));
+  outline: 0 solid rgba(var(--color-gray-rgb) / 10%);
+  background: var(--color-white);
   cursor: pointer;
   /* box-sizing: border-box; */
   transition: all 0.2s ease-in-out;

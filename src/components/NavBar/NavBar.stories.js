@@ -1,6 +1,7 @@
 import React from "react";
 import NavBar from "./NavBar";
-import { MockNavs } from "../Navs/Navs";
+import { mocked } from "../Navs/BaseNavs";
+import Navs from "../Navs/Navs";
 import "../../index.css";
 
 export default {
@@ -15,6 +16,7 @@ const menuItems = [
   { title: "technology", url: "/technology" },
 ];
 
+const MockNavs = mocked(Navs);
 export const Desktop = () => (
   <NavBar menuItems={menuItems} MenuComponent={MockNavs} />
 );
