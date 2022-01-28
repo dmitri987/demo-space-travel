@@ -29,7 +29,7 @@ export const Navs = (args) => (
       Resize viewport to see how it looks on different screen sizes
     </small>
     <div style={{ margin: "5rem", height: "5rem", width: "20rem" }}>
-      <MockNavs {...args} items={items} indexed />;
+      <MockNavs {...args} items={items} indexed />
     </div>
   </div>
 );
@@ -44,7 +44,7 @@ export const Tabs = (args) => (
       Resize viewport to see how it looks on different screen sizes
     </small>
     <div style={{ margin: "3rem", height: "5rem", width: "80%" }}>
-      <MockTabs {...args} items={items} />;
+      <MockTabs {...args} items={items} />
     </div>
   </div>
 );
@@ -60,7 +60,7 @@ export const Bullets = () => (
       Resize viewport to see how it looks on different screen sizes
     </small>
     <div style={{ margin: "3rem", height: "5rem", width: "80%" }}>
-      <MockBullets items={items} />;
+      <MockBullets items={items} />
     </div>
   </div>
 );
@@ -83,7 +83,7 @@ export const Rounds = ({ vertical }) => (
         marginLeft: "15rem",
       }}
     >
-      <MockRounds items={items} style={{ width: "fit-content" }} />;
+      <MockRounds items={items} style={{ width: "fit-content" }} />
     </div>
 
     <h5 className="text-white">Vertical:</h5>
@@ -95,7 +95,7 @@ export const Rounds = ({ vertical }) => (
         justifyContent: "start",
       }}
     >
-      <MockRounds items={items} vertical={vertical} />;
+      <MockRounds items={items} vertical={vertical} />
       {/* <MockRounds items={items} style={{ flexDirection: "column" }} />; */}
     </div>
   </div>

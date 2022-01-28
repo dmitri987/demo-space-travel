@@ -27,6 +27,7 @@
 * {
   box-sizing: border-box;
   margin-block: 0;
+  color: var(--color-white);
 }
 body {
   margin: 0;
@@ -111,11 +112,11 @@ nav * {
   text-transform: uppercase;
 }
 
-h5 {
+/* h5 {
   font-size: 28px;
   line-height: 34px;
   letter-spacing: 4.725px;
-}
+} */
 
 .subheading1 {
   font-size: 28px;

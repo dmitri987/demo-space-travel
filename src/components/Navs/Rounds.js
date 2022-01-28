@@ -7,7 +7,7 @@ const desktop = data.breakpoints.desktop + "px";
 const { ItemText } = defaultComponents;
 
 /** Rounds */
-export default createNavs({
+const BaseRounds = createNavs({
   Navs: `
     --text-color: var(--color-gray);
     --text-color-active: var(--color-black);
@@ -73,3 +73,7 @@ export default createNavs({
     />
   ),
 });
+
+export default function Rounds(props) {
+  return <BaseRounds {...props} indexed />;
+}

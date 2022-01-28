@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { createPage } from "../Page";
-import Navs from "../Navs/Navs";
+import Navs from "../Navs/Tabs";
 import bgImageDesktop from "./bg-destination-desktop.jpg";
 import bgImageTablet from "./bg-destination-tablet.jpg";
 import bgImageMobile from "./bg-destination-mobile.jpg";

@@ -46,6 +46,21 @@ const Content = styled.section`
   }
 `;
 
+const Subtitle = styled.h5`
+  font-size: 28px;
+  letter-spacing: 4.72px;
+
+  @media (max-width: ${desktop}) {
+    font-size: 20px;
+    letter-spacing: 3.38px;
+  }
+
+  @media (max-width: ${tablet}) {
+    font-size: 16px;
+    letter-spacing: 2.7px;
+  }
+`;
+
 const Info = styled.div`
   display: flex;
   flex-direction: column;
@@ -68,7 +83,7 @@ const Home = () => (
   <Page>
     <Content>
       <Info>
-        <h5>SO, YOU WANT TO TRAVEL TO</h5>
+        <Subtitle>SO, YOU WANT TO TRAVEL TO</Subtitle>
         <h1 className="text-white">SPACE</h1>
         <p>
           Let’s face it; if you want to go to space, you might as well genuinely

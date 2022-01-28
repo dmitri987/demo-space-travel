@@ -1,35 +1,43 @@
 import React, { useState } from "react";
-// import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import NavBar from "./NavBar/NavBar";
 import data from "../data.json";
 import { useViewportResizedWidth } from "../helpers";
 
-// const setBackgroundImageUrl = (url, maxWidth = null) => {
-//   if (!url) return;
-//   if (!maxWidth)
-//     return css`
-//       background-image: url(${url});
-//     `;
-
-//   return css`
-//     @media (max-width: ${maxWidth}) {
-//       background-image: url(${url});
-//     }
-//   `;
-// };
+const tablet = data.breakpoints.tablet + "px";
+const desktop = data.breakpoints.desktop + "px";
 
 const StyledHeading = styled.h5`
-  text-align: start;
-
   margin-inline-start: 3rem;
+  font-family: "Barlow Condensed", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  text-align: start;
+  color: var(--color-white);
+
+  font-size: 28px;
+  letter-spacing: 4.72px;
+
+  @media (max-width: ${desktop}) {
+    font-size: 20px;
+    letter-spacing: 2.38px;
+  }
+
+  @media (max-width: ${tablet}) {
+    font-size: 16px;
+    letter-spacing: 2.7px;
+  }
+
+  & .index {
+    opacity: 0.3;
+    margin-inline-end: 0.75em;
+    font-weight: bold;
+  }
 `;
 
 const Heading = ({ index, heading }) => (
-  <StyledHeading className="text-white">
-    <span style={{ opacity: 0.25, marginInlineEnd: "1.5rem" }}>
-      {index <= 9 ? "0" + index : index}
-    </span>
+  <StyledHeading>
+    <span className="index">{index <= 9 ? "0" + index : index}</span>
     <span>{heading}</span>
   </StyledHeading>
 );
@@ -41,8 +49,6 @@ export const createPage = ({
   bgImageTablet,
   bgImageMobile,
 }) => {
-  const { desktop, tablet } = data.breakpoints;
-
   const Page = styled.div`
     display: grid;
     grid-template-rows: 12rem 8rem 1fr;
@@ -68,14 +74,13 @@ export const createPage = ({
   `;
 
   return ({ children }) => {
-    // const viewportWidth = window.innerWidth;
     const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
     useViewportResizedWidth(setViewportWidth);
 
     const styles = {
-      mobile: viewportWidth < tablet,
-      tablet: viewportWidth < desktop,
-      desktop: viewportWidth >= desktop,
+      mobile: viewportWidth < data.breakpoints.tablet,
+      tablet: viewportWidth < data.breakpoints.desktop,
+      desktop: viewportWidth >= data.breakpoints.desktop,
     };
 
     return (

@@ -10,13 +10,14 @@ const Navs = styled.nav`
       ? `
     flex-direction: column;
     height: fit-content;
+    width: 100%;
     gap: 1em;
   `
       : `
     height: 100%;
+    width: fit-content;
     gap: 3em;
   `}
-  width: 100%;
   place-content: center;
   align-items: stretch;
 
@@ -31,6 +32,7 @@ const Navs = styled.nav`
     cursor: pointer;
     font-size: inherit;
     letter-spacing: inherit;
+    text-decoration: none;
 
     ${({ vertical }) => vertical && "width: 100%;"}
 
@@ -54,7 +56,6 @@ const ListItem = styled.li`
 const BaseItem = styled.div`
   display: flex;
   align-items: center;
-  /* height: 100%; */
   font-family: "Barlow Condensed", sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -73,7 +74,7 @@ const BaseItem = styled.div`
   `
       : `
     border-block-end: 2px solid transparent;
-    height: 100%;
+    height: 100%;    
   `}
 
   &.active {
@@ -83,6 +84,10 @@ const BaseItem = styled.div`
 
   &:hover:not(.active) {
     border-color: var(--border-color-hover);
+  }
+
+  & > * {
+    color: inherit;
   }
 `;
 
@@ -118,7 +123,6 @@ const isStyles = (arg) => typeof arg === "string";
 const getComponentFromArgs = (name, args, stylesAllowed = true) => {
   const newComponent = args?.[name];
   if (!newComponent) return defaultComponents[name];
-  console.log(name, newComponent);
   if (isStyles(newComponent)) {
     if (!stylesAllowed)
       throw new TypeError(

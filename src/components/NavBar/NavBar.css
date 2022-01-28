@@ -76,6 +76,16 @@
   transition: all 0.25s ease-in-out;
 }
 
+@supports not (backdrop-filter: none) {
+  .panel {
+    background-color: rgba(var(--color-black-rgb) / 60%);
+  }
+
+  .panel-with-toggler:not(.inline) .panel {
+    background-color: rgba(var(--color-black-rgb) / 90%);
+  }
+}
+
 .panel-with-toggler:not(.inline) .panel.show {
   inset-inline-end: 0;
 }

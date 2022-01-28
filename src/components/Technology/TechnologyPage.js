@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { createPage } from "../Page";
-import Navs from "../Navs/Navs";
+import Navs from "../Navs/Rounds";
 import bgImageDesktop from "./bg-technology-desktop.jpg";
 import bgImageTablet from "./bg-technology-tablet.jpg";
 import bgImageMobile from "./bg-technology-mobile.jpg";
@@ -54,6 +54,16 @@ const Content = styled.section`
     justify-items: center;
     margin-inline: 0;
     gap: 2.5rem;
+  }
+`;
+
+const Subtitle = styled.h5`
+  font-size: 16px;
+  letter-spacing: 2.7px;
+
+  @media (max-width: ${tablet_px}) {
+    font-size: 14px;
+    letter-spacing: 2.36px;
   }
 `;
 
@@ -133,12 +143,13 @@ const Technology = () => {
         <Navs
           items={technology}
           activeItem={index}
-          rounds
           vertical={viewportWidth >= desktop}
           style={{ gridArea: "navs" }}
         />
         <Info>
-          <h5 style={{ gridArea: "subheader" }}>THE TERMINOLOGY...</h5>
+          <Subtitle style={{ gridArea: "subheader" }}>
+            THE TERMINOLOGY...
+          </Subtitle>
           <h3 style={{ gridArea: "header" }}>{name}</h3>
           <p style={{ gridArea: "description" }}>{description}</p>
         </Info>
