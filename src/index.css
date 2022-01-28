@@ -11,16 +11,22 @@
 } */
 
 :root {
-  --color-white: 255 255 255;
-  --color-gray: 208 214 249;
-  --color-black: 11 13 23;
+  --color-white-rgb: 255 255 255;
+  --color-gray-rgb: 208 214 249;
+  --color-black-rgb: 11 13 23;
+
+  --color-white: rgb(var(--color-white-rgb));
+  --color-gray: rgb(var(--color-gray-rgb));
+  --color-black: rgb(var(--color-black-rgb));
 
   /** BREAKPOINTS **/
   --tablet: 750px;
   --desktop: 1024px;
 }
+
 * {
   box-sizing: border-box;
+  margin-block: 0;
 }
 body {
   margin: 0;
@@ -29,23 +35,18 @@ body {
 
 /** UTILITIES **/
 .text-white {
-  color: rgba(var(--color-white)) !important;
+  color: rgba(var(--color-white-rgb)) !important;
 }
 .text-gray {
-  color: rgba(var(--color-gray)) !important;
+  color: rgba(var(--color-gray-rgb)) !important;
 }
 .text-black {
-  color: rgba(var(--color-black)) !important;
+  color: rgba(var(--color-black-rgb)) !important;
 }
 
 /** TYPOGRAPHY **/
-h1,
-h2,
-h3,
-h4,
-h6,
-p {
-  margin-block: 0;
+* {
+  /* margin-block: 0; */
   font-family: "Bellefair", serif;
   font-style: normal;
   font-weight: normal;
@@ -75,6 +76,21 @@ h3 {
 h4 {
   font-size: 32px;
   line-height: 37px;
+}
+
+h1,
+h2,
+h3 {
+  color: rgba(var(--color-white-rgb));
+}
+
+h4,
+h5,
+h6,
+p,
+a,
+button {
+  color: inherit;
 }
 
 p,
@@ -152,16 +168,4 @@ h5 {
     font-size: 15px;
     line-height: 25px;
   }
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-a,
-button {
-  color: inherit;
 }

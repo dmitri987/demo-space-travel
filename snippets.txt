@@ -1,0 +1,54 @@
+// const isString = (config) => typeof config === "string";
+// const isStyles = isString;
+// const isComponent = (config) => typeof config === "function";
+// const isPlainObject = (config) => config.constructor === Object;
+
+// function createComponent(defaultComponent, config) {
+//   if (typeof defaultComponent !== "function") {
+//     throw new TypeError('"defaultComponent" must be React component');
+//   }
+
+//   if (isStyles(config)) {
+//     return styled(defaultComponent)`
+//       ${config}
+//     `;
+//   }
+
+//   if (isComponent(config)) {
+//     return config;
+//   }
+
+//   if (isPlainObject(config)) {
+//     const component = config.component ?? defaultComponent;
+//     const { styles, classes } = config;
+//     const Component = isString(styles)
+//       ? styled(component)`
+//           ${styles}
+//         `
+//       : component;
+//     if (isString(classes))
+//       return (props) => <Component {...props} className={classes} />;
+
+//     return Component;
+//   }
+
+//   return defaultComponent;
+// }
+
+// const Mock = () => <p>Hello world</p>;
+// const NewMock = () => <h1>Bye bye</h1>;
+// console.log(createComponent(Mock, `color: red;`));
+// console.log(createComponent(Mock, `color: red;`) === Mock);
+// try {
+//   console.log(createComponent(null, `color: red;`));
+// } catch (error) {
+//   console.log("error on null defaultComponent");
+// }
+// console.log(createComponent(Mock, NewMock) === NewMock);
+// console.log(
+//   createComponent(Mock, {
+//     component: NewMock,
+//     classes: ".one .two",
+//     styles: "color: red",
+//   })
+// );
