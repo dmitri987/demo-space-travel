@@ -3,9 +3,10 @@ import NavBar from "./NavBar";
 import { mocked } from "../Navs/BaseNavs";
 import Navs from "../Navs/Navs";
 import "../../index.css";
+import { screen, userEvent } from "@storybook/testing-library";
 
 export default {
-  title: "NavBar",
+  title: "Components/NavBar",
   component: NavBar,
 };
 
@@ -28,3 +29,11 @@ export const Tablet = () => (
 export const Mobile = () => (
   <NavBar menuItems={menuItems} MenuComponent={MockNavs} mobile />
 );
+
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+/** Some example UI interactions after story is loaded */
+Mobile.play = async () => {
+  await sleep(300);
+  await userEvent.click(screen.getByAltText("toggle button"));
+};

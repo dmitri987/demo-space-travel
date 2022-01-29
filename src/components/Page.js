@@ -54,6 +54,7 @@ export const createPage = ({
     grid-template-rows: 12rem 8rem 1fr;
     align-items: start;
     height: 100vh;
+    width: 100vw;
     overflow: hidden;
     background-size: cover;
     background-position: center center;

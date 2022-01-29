@@ -89,6 +89,7 @@ const Panel = styled.div`
     color: lightblue;
     font-family: "Barlow", sans-serif;
     font-size: 16px;
+    text-decoration: none;
   }
 `;
 
@@ -102,6 +103,14 @@ const List = styled.ul`
     color: var(--color-gray);
   }
 `;
+
+const ListItem = ({ title, url }) => (
+  <li>
+    <a href={url} target="_blank" rel="noreferrer">
+      {title}
+    </a>
+  </li>
+);
 
 const noClick = (event) => {
   event.stopPropagation();
@@ -131,11 +140,10 @@ const ProjectInfo = (props) => {
               target="_blank"
               rel="noreferrer"
             >
-              this
+              one of the "Frontend Mentor" challenges.
             </a>{" "}
-            "Frontend Mentor" tutorial. I liked it, because it's beautiful and
-            most of things were recurring, so it was a natural candidate for
-            component approach.
+            I liked it, because it's beautiful and most of things were
+            recurring, so it was a natural candidate for component approach.
           </p>
           <p>
             Originally it's done with vanilla JS/HTML/CSS. I thought I'll do it
@@ -143,11 +151,17 @@ const ProjectInfo = (props) => {
           </p>
           <h5>Used technologies</h5>
           <List>
-            <li>React</li>
-            <li>React Router</li>
-            <li>styled components</li>
-            <li>Storybook</li>
-            <li>Create React App</li>
+            <ListItem title="React" url="https://reactjs.org/" />
+            <ListItem title="React Router" url="https://reactrouter.com/" />
+            <ListItem
+              title="styled components"
+              url="https://styled-components.com/"
+            />
+            <ListItem title="Storybook" url="https://storybook.js.org/" />
+            <ListItem
+              title="Create React App"
+              url="https://create-react-app.dev/"
+            />
           </List>
         </Panel>
       </Backdrop>

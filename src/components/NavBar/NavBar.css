@@ -9,28 +9,32 @@
   /* margin-inline-start: 2rem; */
   /* margin-top: 1rem; */
   height: 6rem;
-}
-
-.navbar.desktop {
-  margin-inline-start: 3rem;
+  width: 100%;
+  max-width: 100vw;
   margin-top: 2rem;
 }
 
 .navbar.tablet {
-  margin-inline-start: 2.5rem;
-  /* margin-top: 1rem; */
+  margin-top: 0;
 }
 
 .navbar.mobile {
   height: auto;
-  margin-inline-start: 2rem;
   margin-top: 2rem;
 }
 
 .logo {
-  /* margin-inline-start: 2rem; */
+  margin-inline-start: 3rem;
   flex-grow: 0;
   /* margin-inline-end: auto; */
+}
+
+.tablet .logo {
+  margin-inline-start: 2.5rem;
+}
+
+.mobile .logo {
+  margin-inline-start: 2rem;
 }
 
 .menu {
@@ -70,12 +74,12 @@
 
 .panel {
   display: flex;
-  padding-inline-start: 2em;
   background-color: var(--menu-background-color);
   backdrop-filter: blur(30px);
   transition: all 0.25s ease-in-out;
 }
 
+/** Workaround for Firefox ('backdrop-filter' doesn't work there) */
 @supports not (backdrop-filter: none) {
   .panel {
     background-color: rgba(var(--color-black-rgb) / 60%);
@@ -95,6 +99,7 @@
   flex-direction: column;
   position: fixed;
   width: var(--width);
+  padding-inline-start: 2em;
   inset-block: 0;
   inset-inline-end: calc(-1 * var(--width));
 

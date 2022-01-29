@@ -13,11 +13,6 @@ import spaceCapsuleTabletImage from "./space-capsule-tablet.jpg";
 import spaceportDesktopImage from "./spaceport-desktop.jpg";
 import spaceportTabletImage from "./spaceport-tablet.jpg";
 import { useViewportResizedWidth } from "../../helpers";
-
-// import anoushehAnsariImage from "./anousheh-ansari.png";
-// import douglasHurleyImage from "./douglas-hurley.png";
-// import markShuttleworthImage from "./mark-shuttleworth.png";
-// import victorGloverImage from "./victor-glover.png";
 import data from "../../data.json";
 
 const Page = createPage({
@@ -135,7 +130,6 @@ const Technology = () => {
     0
   );
   const { name, imageDesktop, imageTablet, description } = technology[index];
-  // console.log(viewportWidth, desktop);
 
   return (
     <Page>

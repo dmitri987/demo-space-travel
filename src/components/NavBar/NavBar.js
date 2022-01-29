@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import React, { useState } from "react";
 import Navs from "../Navs/Navs";
 import "./NavBar.css";
@@ -5,8 +6,17 @@ import logo from "./icons/favicon.svg";
 import sandwich from "./icons/sandwich.svg";
 import closeButton from "./icons/close.svg";
 
+const ToggleButton = styled.button`
+  border: none;
+  padding: 0;
+  /* margin: 0; */
+  background: transparent;
+`;
+
 const Toggler = ({ onClick }) => (
-  <img className="toggler" onClick={onClick} src={sandwich} alt="toggle menu" />
+  <ToggleButton className="toggler" onClick={onClick}>
+    <img src={sandwich} alt="toggle button" />
+  </ToggleButton>
 );
 
 const NavPanel = ({ items, MenuComponent, tablet, mobile, activeItem }) => {

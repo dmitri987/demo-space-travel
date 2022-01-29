@@ -11,7 +11,6 @@ export default createNavs({
     --border-color-active: var(--color-white);
     --border-color-hover: var(--color-gray);
 
-    width: fit-content;
     height: 3em;
     gap: 2em;
     font-size: 16px;
