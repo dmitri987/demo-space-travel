@@ -35,6 +35,7 @@ export const Navs = (args) => (
 );
 Navs.args = {
   vertical: false,
+  startFromIndex: 0,
 };
 
 const MockTabs = mocked(_Tabs);
@@ -43,7 +44,7 @@ export const Tabs = (args) => (
     <small className="text-gray">
       Resize viewport to see how it looks on different screen sizes
     </small>
-    <div style={{ margin: "3rem", height: "5rem", width: "80%" }}>
+    <div style={{ margin: "5rem", height: "5rem", width: "20rem" }}>
       <MockTabs {...args} items={items} />
     </div>
   </div>

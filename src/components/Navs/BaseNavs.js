@@ -150,6 +150,7 @@ export const createNavs = (args) => {
       style,
       vertical,
       indexed,
+      startFromIndex,
       Link = _Link,
     } = props;
 
@@ -180,7 +181,11 @@ export const createNavs = (args) => {
             return (
               <ListItem key={url}>
                 <Item className="item active" vertical={vertical}>
-                  <ItemText index={indexed ? index : undefined} title={title} />
+                  <ItemText
+                    index={indexed ? index : undefined}
+                    title={title}
+                    startFromIndex={startFromIndex}
+                  />
                 </Item>
               </ListItem>
             );
@@ -189,7 +194,11 @@ export const createNavs = (args) => {
             <ListItem key={url} onClick={setActiveListItem}>
               <Link className="link" url={url}>
                 <Item className="item" vertical={vertical}>
-                  <ItemText index={indexed ? index : undefined} title={title} />
+                  <ItemText
+                    index={indexed ? index : undefined}
+                    title={title}
+                    startFromIndex={startFromIndex}
+                  />
                 </Item>
               </Link>
             </ListItem>
