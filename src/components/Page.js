@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import NavBar from "./NavBar/NavBar";
 import data from "../data.json";
-import { useViewportResizedWidth } from "../helpers";
 
 const tablet = data.breakpoints.tablet + "px";
 const desktop = data.breakpoints.desktop + "px";
@@ -82,10 +81,7 @@ export const createPage = ({
     padding: 0;
   `;
 
-  return ({ children }) => {
-    const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
-    useViewportResizedWidth(setViewportWidth);
-
+  return ({ children, viewportWidth }) => {
     const styles = {
       mobile: viewportWidth < data.breakpoints.tablet,
       tablet: viewportWidth < data.breakpoints.desktop,
@@ -93,7 +89,7 @@ export const createPage = ({
     };
 
     return (
-      <Page>
+      <Page viewportWidth={viewportWidth}>
         <NavBar
           menuItems={data.navBar}
           {...styles}

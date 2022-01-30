@@ -20,19 +20,13 @@ const Page = createPage({
   bgImageMobile,
 });
 
-const tablet = data.breakpoints.tablet + "px";
+// const tablet = data.breakpoints.tablet + "px";
 const desktop = data.breakpoints.desktop + "px";
-
-/**
- * TODO:
- *  put planets in data.json ?
- */
 
 const Content = styled.div`
   display: grid;
   grid-template-columns: 1fr 27rem;
   height: 100%;
-  /* margin-top: 4rem; */
   margin-inline: 10vw;
   justify-content: space-between;
   text-align: start;

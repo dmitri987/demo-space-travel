@@ -164,14 +164,15 @@ export const createNavs = (args) => {
             ),
             0
           )
-        : activeItem ?? 0;
+        : activeItem;
 
-    const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
+    const [_activeIndex, setActiveIndex] = useState(0);
     const setActiveListItem = (event) => {
-      const item = event.target.closest("li"); // TODO: change it if don't use ul/li
+      const item = event.target.closest("li");
       const index = [...item.parentElement.children].indexOf(item);
       setActiveIndex(index);
     };
+    const activeIndex = initialActiveIndex ?? _activeIndex;
 
     return (
       <Navs className={className} style={style} vertical={vertical}>

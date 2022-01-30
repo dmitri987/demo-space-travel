@@ -121,7 +121,7 @@ const ProjectInfo = (props) => {
   const toggleShow = () => setShow(!show);
 
   return (
-    <div className={show && "show"}>
+    <div className={show ? "show" : ""}>
       <Toggle
         className="icon"
         src={icon}

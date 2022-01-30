@@ -1,4 +1,4 @@
-import { createNavs, defaultComponents } from "./BaseNavs";
+import { createNavs } from "./BaseNavs";
 import data from "../../data.json";
 
 const tablet = data.breakpoints.tablet + "px";

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { createPage } from "../Page";
@@ -12,7 +12,6 @@ import spaceCapsuleDesktopImage from "./space-capsule-desktop.jpg";
 import spaceCapsuleTabletImage from "./space-capsule-tablet.jpg";
 import spaceportDesktopImage from "./spaceport-desktop.jpg";
 import spaceportTabletImage from "./spaceport-tablet.jpg";
-import { useViewportResizedWidth } from "../../helpers";
 import data from "../../data.json";
 
 const Page = createPage({
@@ -120,10 +119,7 @@ const technology = [
   },
 ];
 
-const Technology = () => {
-  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
-  useViewportResizedWidth(setViewportWidth);
-
+const Technology = ({ viewportWidth }) => {
   const { hash } = useLocation();
   const index = Math.max(
     technology.findIndex((p) => p.url === hash),

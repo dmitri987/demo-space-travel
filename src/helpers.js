@@ -8,7 +8,11 @@ const viewportObserver = new ResizeObserver((entries) => {
 
 viewportObserver.observe(document.documentElement);
 
-export const useViewportResizedWidth = (callback) => {
+export const subscribeViewportWidthObserver = (callback) => {
   if (callback && !callbacks.has(callback)) callbacks.add(callback);
+
+  return function unsubscribe() {
+    callbacks.delete(callback);
+  };
   // console.log("useViewportResizeObserver", callbacks);
 };
