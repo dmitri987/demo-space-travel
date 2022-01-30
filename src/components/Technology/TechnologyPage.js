@@ -37,7 +37,7 @@ const Content = styled.section`
     " .    .   image";
   grid-template-columns: 6rem 1fr 1fr;
   gap: 3rem;
-  width: 100vw;
+  width: 100%;
   margin-inline-start: 4rem;
   justify-content: space-between;
   color: rgba(var(--color-gray));

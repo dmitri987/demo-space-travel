@@ -123,7 +123,7 @@ const ProjectInfo = (props) => {
   return (
     <div className={show && "show"}>
       <Toggle
-        className={"icon"}
+        className="icon"
         src={icon}
         title="About this project"
         alt="toggle"

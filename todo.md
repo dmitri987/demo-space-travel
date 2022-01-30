@@ -1,11 +1,7 @@
-global:
-typography
-
-Navs:
-
 TODO:
-each navs to own file ??
-aria attributes
+fix bug with Navs on 'back'/'forward'
+preload pages
+gitHub
+clear index.css
 
-project description:
-tech stack, gitHub, Storybook
+aria attributes

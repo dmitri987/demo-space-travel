@@ -9,6 +9,7 @@ const desktop = data.breakpoints.desktop + "px";
 
 const StyledHeading = styled.h5`
   margin-inline-start: 3rem;
+  margin-block-end: 4rem;
   font-family: "Barlow Condensed", sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -74,6 +75,13 @@ export const createPage = ({
     }
   `;
 
+  const Content = styled.div`
+    width: clamp(320px, 100vw, 1600px);
+    height: 100%;
+    margin: 0 auto;
+    padding: 0;
+  `;
+
   return ({ children }) => {
     const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
     useViewportResizedWidth(setViewportWidth);
@@ -92,8 +100,7 @@ export const createPage = ({
           activeItem={activePageIndex}
         />
         {heading && <Heading index={activePageIndex} heading={heading} />}
-
-        {children}
+        <Content>{children}</Content>
       </Page>
     );
   };

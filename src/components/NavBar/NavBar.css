@@ -141,8 +141,9 @@
   flex-grow: 1;
   /* width: 100%; */
   border-block: 1px solid grey;
-  margin-inline-start: 5vw;
-  margin-inline-end: -3vw;
+  left: 3vw;
+  /* margin-inline-start: 3vw;
+  margin-inline-end: -3vw; */
   z-index: 1;
   background-color: var(--menu-background-color);
 }
