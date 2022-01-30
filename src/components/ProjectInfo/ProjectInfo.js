@@ -146,7 +146,7 @@ const ProjectInfo = (props) => {
             recurring, so it was a natural candidate for component approach.
           </p>
           <p>
-            Originally it's done with vanilla JS/HTML/CSS. I thought I'll do it
+            Originally it's done with vanilla JS/HTML/CSS. I thought I'd do it
             with React.
           </p>
           <h5>Used technologies</h5>
