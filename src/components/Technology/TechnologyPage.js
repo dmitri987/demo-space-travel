@@ -36,15 +36,17 @@ const Content = styled.section`
     " .    .   image";
   grid-template-columns: 6rem 1fr 1fr;
   gap: 3rem;
-  width: 100%;
+  /* width: 100%; */
+  margin-block-start: 10%;
   margin-inline-start: 4rem;
   justify-content: space-between;
+  /* align-self: center; */
   color: rgba(var(--color-gray));
 
   @media (max-width: ${desktop_px}) {
     grid-template-areas: "image" "navs" "info";
     grid-template-columns: 100vw;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto auto 1fr;
     justify-items: center;
     margin-inline: 0;
     gap: 2.5rem;
@@ -52,8 +54,11 @@ const Content = styled.section`
 `;
 
 const Subtitle = styled.h5`
+  grid-area: "subheader";
   font-size: 16px;
   letter-spacing: 2.7px;
+  align-self: center;
+  color: var(--color-gray);
 
   @media (max-width: ${tablet_px}) {
     font-size: 14px;
@@ -61,18 +66,28 @@ const Subtitle = styled.h5`
   }
 `;
 
+const Title = styled.h3`
+  grid-area: "header";
+
+  @media (max-width: ${desktop_px}) {
+    margin-bottom: 1rem;
+  }
+`;
+
 const Info = styled.div`
   display: grid;
   grid-template-areas: "subheader" "header" "description";
-  gap: 1rem;
+  /* gap: 1rem; */
   max-width: 30rem;
   text-align: start;
   justify-self: start;
 
   @media (max-width: ${desktop_px}) {
     justify-self: center;
+    align-self: start;
     text-align: center;
     max-width: 40rem;
+    gap: 0.5rem;
   }
 
   @media (max-width: ${tablet_px}) {
@@ -137,10 +152,8 @@ const Technology = ({ viewportWidth }) => {
           style={{ gridArea: "navs" }}
         />
         <Info>
-          <Subtitle style={{ gridArea: "subheader" }}>
-            THE TERMINOLOGY...
-          </Subtitle>
-          <h3 style={{ gridArea: "header" }}>{name}</h3>
+          <Subtitle>THE TERMINOLOGY...</Subtitle>
+          <Title>{name}</Title>
           <p style={{ gridArea: "description" }}>{description}</p>
         </Info>
         <Image

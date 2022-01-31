@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { createPage } from "../Page";
 import ActionButton from "../ActionButton/ActionButton";
@@ -92,7 +93,9 @@ const Home = () => (
           experience!
         </p>
       </Info>
-      <ActionButton style={{ gridArea: "action" }} />
+      <NavLink to="/destination">
+        <ActionButton style={{ gridArea: "action" }} />
+      </NavLink>
     </Content>
   </Page>
 );

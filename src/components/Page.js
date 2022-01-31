@@ -54,11 +54,12 @@ export const createPage = ({
 }) => {
   const Page = styled.div`
     display: grid;
-    grid-template-rows: 12rem 8rem 1fr;
+    grid-template-rows: 12rem 2rem 1fr;
     align-items: start;
     height: 100vh;
     width: 100vw;
-    overflow: hidden;
+    overflow-x: hidden;
+    background-color: black;
     background-size: cover;
     background-position: center center;
 
@@ -66,18 +67,19 @@ export const createPage = ({
 
     @media (max-width: ${tablet_px}) {
       grid-template-rows: 8rem 4rem 1fr;
-      overflow: auto;
+      /* overflow: auto; */
       background-image: url(${bgImageMobile});
     }
 
     @media (max-width: ${desktop_px}) and (min-width: ${tablet_px}) {
       grid-template-rows: 8rem 4rem 1fr;
-      overflow: auto;
+      /* overflow: auto; */
       background-image: url(${bgImageTablet});
     }
   `;
 
   const Content = styled.div`
+    display: grid;
     width: clamp(320px, 100vw, 1600px);
     height: 100%;
     margin: 0 auto;

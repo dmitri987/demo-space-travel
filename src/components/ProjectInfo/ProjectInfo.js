@@ -117,8 +117,13 @@ const noClick = (event) => {
 };
 
 const ProjectInfo = (props) => {
-  const [show, setShow] = useState(true);
-  const toggleShow = () => setShow(!show);
+  const [show, setShow] = useState(
+    () => !window.localStorage.getItem("projectInfoShown")
+  );
+  const toggleShow = () => {
+    window.localStorage.setItem("projectInfoShown", true);
+    setShow(!show);
+  };
 
   return (
     <div className={show ? "show" : ""}>
@@ -134,7 +139,7 @@ const ProjectInfo = (props) => {
           <CloseIcon src={closeIcon} alt="close window" onClick={toggleShow} />
           <h5>About this project</h5>
           <p>
-            Design and idea of this project are from{" "}
+            Both design and idea of this project are from{" "}
             <a
               href="https://www.frontendmentor.io/challenges/space-tourism-multipage-website-gRWj1URZ3"
               target="_blank"
@@ -142,11 +147,11 @@ const ProjectInfo = (props) => {
             >
               one of the "Frontend Mentor" challenges.
             </a>{" "}
-            I liked it, because it's beautiful and most of things were
-            recurring, so it was a natural candidate for component approach.
+            I liked it, because it's beautiful, simple and all pages had
+            recurring patterns.
           </p>
           <p>
-            Originally it's done with vanilla JS/HTML/CSS. I thought I'd do it
+            Originally it was done with vanilla JS/HTML/CSS. I thought I'd do it
             with React.
           </p>
           <h5>Used technologies</h5>

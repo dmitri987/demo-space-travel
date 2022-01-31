@@ -1,5 +1,6 @@
 TODO:
-fix bug with Navs on 'back'/'forward'
+favicon on deployed version
+fixate tabs on Crew page
 preload pages
 gitHub
 clear index.css

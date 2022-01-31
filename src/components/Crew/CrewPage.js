@@ -65,50 +65,66 @@ const Content = styled.section`
   grid-template-areas: "info image";
   grid-template-columns: 1fr 1fr;
   justify-content: center;
-  min-height: 100%;
+  height: 100%;
   margin-inline: 8vw;
-  gap: 2rem;
+  /* gap: 2rem; */
 
   @media (max-width: ${desktop}) {
     grid-template-areas: "info" "image";
     grid-template-columns: 40rem;
+    grid-template-rows: 30vh 1fr;
     justify-content: center;
     gap: 0;
   }
 
   @media (max-width: ${tablet}) {
     grid-template-areas: "image" "info";
-    grid-template-columns: 80vw;
+    grid-template-columns: clamp(320px, 80vw, 25rem);
+    grid-template-rows: 50% 1fr;
     gap: 1rem;
   }
 `;
 
 const Info = styled.div`
   grid-area: info;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  display: grid;
+  grid-template-areas: "rank" "name" "description" "tabs";
+  /* display: flex;
+  flex-direction: column; */
+  align-content: end;
+  /* justify-content: space-between; */
   /* justify-items: start; */
   text-align: start;
-  margin-top: 10rem;
+  /* height: 100%; */
+  /* margin-top: 10rem; */
   margin-bottom: 3rem;
-  justify-self: end;
+  justify-self: start;
 
   @media (max-width: ${desktop}) {
     margin-block: 1rem;
     text-align: center;
     align-items: center;
     justify-self: center;
+    align-self: end;
+    justify-content: start;
+    justify-items: center;
+  }
+
+  @media (max-width: ${tablet}) {
+    align-self: start;
+    grid-template-areas: "tabs" "rank" "name" "description";
   }
 `;
 
 const Rank = styled.h4`
-  color: rgba(var(--color-white) / 50%);
+  grid-area: "rank";
+  color: rgba(var(--color-white-rgb) / 30%);
 `;
 
 const Name = styled.h3`
+  grid-area: "name";
   color: rgba(var(--color-white));
-  margin-block: 1rem;
+  margin-block: 0.5rem;
 
   @media (max-width: ${desktop}) {
     margin-block: 0.5rem;
@@ -116,26 +132,41 @@ const Name = styled.h3`
 `;
 
 const Description = styled.p`
+  grid-area: "description";
   max-width: 30rem;
-  color: rgba(var(--color-gray));
+  /* color: rgba(var(--color-gray-rgb)); */
+  margin-top: 1rem;
+  margin-bottom: 6rem;
 
   @media (max-width: ${desktop}) {
     max-width: 100%;
+    margin-bottom: 0;
   }
 `;
 
+const ImageSection = styled.div`
+  display: grid;
+  justify-content: center;
+  position: relative;
+`;
+
 const Image = styled.img`
+  position: absolute;
+  left: 0;
+  bottom: 0;
   grid-area: image;
-  width: 35rem;
+  max-width: 40rem;
   align-self: end;
   justify-self: start;
 
   @media (max-width: ${desktop}) {
-    max-width: 30rem;
+    position: relative;
+    max-width: 35rem;
     justify-self: center;
   }
   @media (max-width: ${tablet}) {
-    max-width: 20rem;
+    max-width: 100%;
+    /* align-self: center; */
   }
 `;
 
@@ -160,13 +191,17 @@ const Crew = () => {
             items={crew}
             bullets
             activeItem={index}
-            style={{ justifySelf: "end", height: "6rem" }}
+            style={{ height: "6rem", gridArea: "tabs" }}
           />
         </Info>
-        <Image src={image} alt="" style={{ width: imageWidth }} />
+        {/* <div>placeholder</div> */}
+        <ImageSection>
+          <Image src={image} alt="" />
+        </ImageSection>
       </Content>
     </Page>
   );
 };
+// style={{ width: imageWidth }}
 
 export default Crew;

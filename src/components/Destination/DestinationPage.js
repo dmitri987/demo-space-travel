@@ -22,29 +22,40 @@ const Page = createPage({
 
 // const tablet = data.breakpoints.tablet + "px";
 const desktop = data.breakpoints.desktop + "px";
+const tablet = data.breakpoints.tablet + "px";
 
 const Content = styled.div`
   display: grid;
-  grid-template-columns: 1fr 27rem;
-  height: 100%;
+  grid-template-columns: 1fr 1fr;
+  /* height: 100%; */
   margin-inline: 10vw;
   justify-content: space-between;
+  margin-block-start: 20vh;
+  align-self: start;
   text-align: start;
-  gap: 2.5rem;
+  gap: 8vw;
   color: rgb(var(--color-gray));
 
   @media (max-width: ${desktop}) {
     grid-template-columns: 70vw;
+    grid-template-rows: 30vh 1fr;
+    margin-block-start: 5vh;
     justify-items: center;
     justify-content: center;
+    align-self: start;
     text-align: center;
     gap: 1rem;
+  }
+
+  @media (max-width: ${tablet}) {
+    grid-template-rows: 25vh 1fr;
+    margin-block-start: 2vh;
   }
 `;
 
 const Info = styled.div`
   display: grid;
-  gap: 2rem;
+  /* gap: 2rem; */
   justify-items: start;
   align-content: start;
   text-align: inherit;
@@ -57,19 +68,24 @@ const Info = styled.div`
 `;
 
 const Image = styled.img`
-  width: 100%;
-  max-width: 450px;
+  max-height: 100%;
+  max-width: 100%;
+  /* max-width: 450px; */
   aspect-ratio: 1;
+  justify-self: center;
 
   @media (max-width: ${desktop}) {
-    width: 300px;
-    height: 300px;
+    max-height: 90%;
+    max-width: 90%;
+    /* max-width: 300px;
+    max-height: 300px; */
+    align-self: center;
   }
 `;
 
 const Stats = ({ title, value }) => (
   <div>
-    <h6 className="subheading2" style={{ marginBottom: "0.5rem" }}>
+    <h6 className="subheading2 text-gray" style={{ marginBottom: "0.5rem" }}>
       {title}
     </h6>
     <p className="subheading1 text-white">{value}</p>
@@ -80,16 +96,23 @@ const StatSection = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 100%;
+  margin-top: 2rem;
 
   @media (max-width: ${desktop}) {
     justify-items: center;
+  }
+
+  @media (max-width: ${tablet}) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 1rem;
   }
 `;
 
 const Delimiter = styled.hr`
   width: 100%;
-  border-color: rgba(var(--color-gray) / 20%);
-  margin-top: 1rem;
+  border-color: rgba(var(--color-gray-rgb) / 20%);
+  margin-top: 3rem;
 `;
 
 const planets = [
@@ -149,7 +172,7 @@ const Destination = () => {
             items={planets}
             tabs
             activeItem={index}
-            style={{ height: "2.8rem" }}
+            style={{ height: "2.8rem", marginBottom: "2rem" }}
           />
           <h2 className="text-white">{title}</h2>
           <p>{description}</p>
