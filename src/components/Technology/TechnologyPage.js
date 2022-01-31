@@ -3,15 +3,15 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { createPage } from "../Page";
 import Navs from "../Navs/Rounds";
-import bgImageDesktop from "./bg-technology-desktop.jpg";
-import bgImageTablet from "./bg-technology-tablet.jpg";
-import bgImageMobile from "./bg-technology-mobile.jpg";
-import launchVehicleDesktopImage from "./launch-vehicle-desktop.jpg";
-import launchVehicleTabletImage from "./launch-vehicle-tablet.jpg";
-import spaceCapsuleDesktopImage from "./space-capsule-desktop.jpg";
-import spaceCapsuleTabletImage from "./space-capsule-tablet.jpg";
-import spaceportDesktopImage from "./spaceport-desktop.jpg";
-import spaceportTabletImage from "./spaceport-tablet.jpg";
+import bgImageDesktop from "./bg-technology-desktop.webp";
+import bgImageTablet from "./bg-technology-tablet.webp";
+import bgImageMobile from "./bg-technology-mobile.webp";
+import launchVehicleDesktopImage from "./launch-vehicle-desktop.webp";
+import launchVehicleTabletImage from "./launch-vehicle-tablet.webp";
+import spaceCapsuleDesktopImage from "./space-capsule-desktop.webp";
+import spaceCapsuleTabletImage from "./space-capsule-tablet.webp";
+import spaceportDesktopImage from "./spaceport-desktop.webp";
+import spaceportTabletImage from "./spaceport-tablet.webp";
 import data from "../../data.json";
 
 const Page = createPage({

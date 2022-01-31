@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { createPage } from "../Page";
 import ActionButton from "../ActionButton/ActionButton";
-import bgImageDesktop from "./bg-home-desktop.jpg";
-import bgImageTablet from "./bg-home-tablet.jpg";
-import bgImageMobile from "./bg-home-mobile.jpg";
+import bgImageDesktop from "./bg-home-desktop.webp";
+import bgImageTablet from "./bg-home-tablet.webp";
+import bgImageMobile from "./bg-home-mobile.webp";
 import data from "../../data.json";
 
 const Page = createPage({

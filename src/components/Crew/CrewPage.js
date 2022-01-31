@@ -3,13 +3,13 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { createPage } from "../Page";
 import Navs from "../Navs/Bullets";
-import bgImageDesktop from "./bg-crew-desktop.jpg";
-import bgImageTablet from "./bg-crew-tablet.jpg";
-import bgImageMobile from "./bg-crew-mobile.jpg";
-import anoushehAnsariImage from "./anousheh-ansari.png";
-import douglasHurleyImage from "./douglas-hurley.png";
-import markShuttleworthImage from "./mark-shuttleworth.png";
-import victorGloverImage from "./victor-glover.png";
+import bgImageDesktop from "./bg-crew-desktop.webp";
+import bgImageTablet from "./bg-crew-tablet.webp";
+import bgImageMobile from "./bg-crew-mobile.webp";
+import anoushehAnsariImage from "./anousheh-ansari.webp";
+import douglasHurleyImage from "./douglas-hurley.webp";
+import markShuttleworthImage from "./mark-shuttleworth.webp";
+import victorGloverImage from "./victor-glover.webp";
 import data from "../../data.json";
 
 const Page = createPage({

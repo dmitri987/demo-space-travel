@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import NavBar from "./NavBar/NavBar";
+import { subscribeViewportWidthObserver } from "../helpers";
 import data from "../data.json";
 
-const tablet = data.breakpoints.tablet + "px";
-const desktop = data.breakpoints.desktop + "px";
+const tablet = data.breakpoints.tablet;
+const desktop = data.breakpoints.desktop;
+const tablet_px = tablet + "px";
+const desktop_px = desktop + "px";
 
 const StyledHeading = styled.h5`
   margin-inline-start: 3rem;
@@ -18,12 +21,12 @@ const StyledHeading = styled.h5`
   font-size: 28px;
   letter-spacing: 4.72px;
 
-  @media (max-width: ${desktop}) {
+  @media (max-width: ${desktop_px}) {
     font-size: 20px;
     letter-spacing: 2.38px;
   }
 
-  @media (max-width: ${tablet}) {
+  @media (max-width: ${tablet_px}) {
     font-size: 16px;
     letter-spacing: 2.7px;
   }
@@ -61,13 +64,13 @@ export const createPage = ({
 
     background-image: url(${bgImageDesktop});
 
-    @media (max-width: ${tablet + "px"}) {
+    @media (max-width: ${tablet_px}) {
       grid-template-rows: 8rem 4rem 1fr;
       overflow: auto;
       background-image: url(${bgImageMobile});
     }
 
-    @media (max-width: ${desktop + "px"}) and (min-width: ${tablet + "px"}) {
+    @media (max-width: ${desktop_px}) and (min-width: ${tablet_px}) {
       grid-template-rows: 8rem 4rem 1fr;
       overflow: auto;
       background-image: url(${bgImageTablet});
@@ -81,15 +84,21 @@ export const createPage = ({
     padding: 0;
   `;
 
-  return ({ children, viewportWidth }) => {
+  return ({ children }) => {
+    const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+      return subscribeViewportWidthObserver(setViewportWidth);
+    }, []);
+
     const styles = {
-      mobile: viewportWidth < data.breakpoints.tablet,
-      tablet: viewportWidth < data.breakpoints.desktop,
-      desktop: viewportWidth >= data.breakpoints.desktop,
+      mobile: viewportWidth < tablet,
+      tablet: viewportWidth < desktop,
+      desktop: viewportWidth >= desktop,
     };
 
     return (
-      <Page viewportWidth={viewportWidth}>
+      <Page>
         <NavBar
           menuItems={data.navBar}
           {...styles}

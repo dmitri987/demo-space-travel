@@ -3,13 +3,13 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { createPage } from "../Page";
 import Navs from "../Navs/Tabs";
-import bgImageDesktop from "./bg-destination-desktop.jpg";
-import bgImageTablet from "./bg-destination-tablet.jpg";
-import bgImageMobile from "./bg-destination-mobile.jpg";
-import moonImage from "./moon.png";
-import marsImage from "./mars.png";
-import europaImage from "./europa.png";
-import titanImage from "./titan.png";
+import bgImageDesktop from "./bg-destination-desktop.webp";
+import bgImageTablet from "./bg-destination-tablet.webp";
+import bgImageMobile from "./bg-destination-mobile.webp";
+import moonImage from "./moon.webp";
+import marsImage from "./mars.webp";
+import europaImage from "./europa.webp";
+import titanImage from "./titan.webp";
 import data from "../../data.json";
 
 const Page = createPage({

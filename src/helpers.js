@@ -14,5 +14,4 @@ export const subscribeViewportWidthObserver = (callback) => {
   return function unsubscribe() {
     callbacks.delete(callback);
   };
-  // console.log("useViewportResizeObserver", callbacks);
 };
