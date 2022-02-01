@@ -140,7 +140,7 @@
   height: 0;
   flex-grow: 1;
   /* width: 100%; */
-  border-block: 1px solid grey;
+  border-block: 1px solid var(--menu-background-color);
   left: 3vw;
   /* margin-inline-start: 3vw;
   margin-inline-end: -3vw; */

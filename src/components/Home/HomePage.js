@@ -25,7 +25,7 @@ const Content = styled.section`
   gap: 10vw;
   align-items: center;
   justify-content: center;
-  margin-block-start: 8vw;
+  margin-block-start: 8vh;
   margin-block-end: 10rem;
   margin-inline: clamp(5rem, 10vw, 10rem);
   color: rgba(var(--color-white));
