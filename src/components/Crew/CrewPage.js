@@ -64,7 +64,7 @@ const Content = styled.section`
   grid-template-columns: 1fr 1fr;
   justify-content: center;
   height: 100%;
-  margin-inline: calc(5rem);
+  margin-inline: 5rem;
 
   @media (max-width: ${desktop}) {
     grid-template-areas: "info" "image";
@@ -106,6 +106,7 @@ const Info = styled.div`
   @media (max-width: ${tablet}) {
     align-self: start;
     grid-template-areas: "tabs" "rank" "name" "description";
+    margin-block-end: 5rem;
   }
 `;
 

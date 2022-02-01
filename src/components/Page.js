@@ -63,11 +63,10 @@ export const createPage = ({
 
   const Page = styled.div`
     display: grid;
-    ${() => gridTemlateRows("12rem", "2rem", "1fr")}
+    ${() => gridTemlateRows("12rem", "6rem", "1fr")}
     align-items: start;
     min-height: 100vh;
     width: 100vw;
-    overflow-x: hidden;
     background-color: black;
     background-size: cover;
     background-position: center center;
@@ -91,6 +90,7 @@ export const createPage = ({
     height: 100%;
     margin: 0 auto;
     padding: 0;
+    overflow-x: hidden;
   `;
 
   return ({ children }) => {

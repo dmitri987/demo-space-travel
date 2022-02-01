@@ -28,7 +28,7 @@ const Content = styled.div`
   grid-template-columns: 1fr 1fr;
   margin-inline: 8vw;
   justify-content: space-between;
-  margin-block-start: 20vh;
+  margin-block-start: 10vw;
   margin-block-end: 5rem;
   align-self: start;
   text-align: start;

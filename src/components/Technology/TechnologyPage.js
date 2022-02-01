@@ -34,9 +34,9 @@ const Content = styled.section`
     "navs info image"
     "navs info image"
     " .    .   image";
-  grid-template-columns: 6rem 1fr 1fr;
+  grid-template-columns: auto auto auto;
   gap: 3rem;
-  margin-block-start: 20vh;
+  margin-block-start: 12vh;
   margin-block-end: 5rem;
   margin-inline-start: 4rem;
   justify-content: space-between;
@@ -47,6 +47,7 @@ const Content = styled.section`
     grid-template-columns: 100vw;
     grid-template-rows: auto auto 1fr;
     justify-items: center;
+    margin-block-start: 0;
     margin-inline: 0;
     gap: 2.5rem;
   }
