@@ -20,17 +20,16 @@ const Page = createPage({
   bgImageMobile,
 });
 
-// const tablet = data.breakpoints.tablet + "px";
 const desktop = data.breakpoints.desktop + "px";
 const tablet = data.breakpoints.tablet + "px";
 
 const Content = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  /* height: 100%; */
-  margin-inline: 10vw;
+  margin-inline: 8vw;
   justify-content: space-between;
   margin-block-start: 20vh;
+  margin-block-end: 5rem;
   align-self: start;
   text-align: start;
   gap: 8vw;
@@ -38,8 +37,8 @@ const Content = styled.div`
 
   @media (max-width: ${desktop}) {
     grid-template-columns: 70vw;
-    grid-template-rows: 30vh 1fr;
-    margin-block-start: 5vh;
+    grid-template-rows: auto 1fr;
+    margin-block-start: 0;
     justify-items: center;
     justify-content: center;
     align-self: start;
@@ -48,17 +47,19 @@ const Content = styled.div`
   }
 
   @media (max-width: ${tablet}) {
-    grid-template-rows: 25vh 1fr;
-    margin-block-start: 2vh;
+    grid-template-columns: 80vw;
+    grid-template-rows: auto 1fr;
+    margin-block-end: 2vh;
+    /* margin-inline: 5vw; */
   }
 `;
 
 const Info = styled.div`
   display: grid;
-  /* gap: 2rem; */
   justify-items: start;
   align-content: start;
   text-align: inherit;
+  max-width: 25rem;
 
   @media (max-width: ${desktop}) {
     justify-items: center;
@@ -70,22 +71,27 @@ const Info = styled.div`
 const Image = styled.img`
   max-height: 100%;
   max-width: 100%;
-  /* max-width: 450px; */
+  /* max-height: calc(20rem + 5vw);
+  max-width: calc(20rem + 5vw); */
   aspect-ratio: 1;
   justify-self: center;
 
   @media (max-width: ${desktop}) {
-    max-height: 90%;
-    max-width: 90%;
-    /* max-width: 300px;
-    max-height: 300px; */
+    max-height: 20rem;
+    max-width: 20rem;
     align-self: center;
+    margin-block: 2rem;
+  }
+
+  @media (max-width: ${tablet}) {
+    max-height: 15rem;
+    max-width: 15rem;
   }
 `;
 
 const Stats = ({ title, value }) => (
   <div>
-    <h6 className="subheading2 text-gray" style={{ marginBottom: "0.5rem" }}>
+    <h6 className="subheading2 text-gray" style={{ marginBottom: "1rem" }}>
       {title}
     </h6>
     <p className="subheading1 text-white">{value}</p>

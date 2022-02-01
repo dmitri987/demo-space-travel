@@ -56,7 +56,6 @@ const Panel = styled.div`
   width: clamp(20rem, 100vw, 35rem);
   min-height: 20vh;
   padding-inline: clamp(0.75rem, 5vw, 3rem);
-  /* padding-block-start: 1rem; */
   padding-block-end: 3rem;
   border-radius: 4px;
   text-align: start;
@@ -83,6 +82,7 @@ const Panel = styled.div`
     margin-block-start: 1rem;
     font-size: 16px;
     line-height: 1.5;
+    color: var(--color-white);
   }
 
   & a {
@@ -166,6 +166,10 @@ const ProjectInfo = (props) => {
             <ListItem
               title="Create React App"
               url="https://create-react-app.dev/"
+            />
+            <ListItem
+              title="ResizeObserver"
+              url="https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver"
             />
           </List>
         </Panel>

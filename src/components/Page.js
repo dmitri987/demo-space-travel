@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import NavBar from "./NavBar/NavBar";
 import { subscribeViewportWidthObserver } from "../helpers";
 import data from "../data.json";
@@ -52,11 +52,20 @@ export const createPage = ({
   bgImageTablet,
   bgImageMobile,
 }) => {
+  const gridTemlateRows = (navBar, title, content) =>
+    heading
+      ? css`
+          grid-template-rows: ${navBar} ${title} ${content};
+        `
+      : css`
+          grid-template-rows: ${navBar} ${content};
+        `;
+
   const Page = styled.div`
     display: grid;
-    grid-template-rows: 12rem 2rem 1fr;
+    ${() => gridTemlateRows("12rem", "2rem", "1fr")}
     align-items: start;
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
     overflow-x: hidden;
     background-color: black;
@@ -65,22 +74,20 @@ export const createPage = ({
 
     background-image: url(${bgImageDesktop});
 
-    @media (max-width: ${tablet_px}) {
-      grid-template-rows: 8rem 4rem 1fr;
-      /* overflow: auto; */
-      background-image: url(${bgImageMobile});
-    }
-
-    @media (max-width: ${desktop_px}) and (min-width: ${tablet_px}) {
-      grid-template-rows: 8rem 4rem 1fr;
+    @media (max-width: ${desktop_px}) {
+      ${() => gridTemlateRows("8rem", "4rem", "1fr")}
+      /* grid-template-rows: 8rem 4rem 1fr; */
       /* overflow: auto; */
       background-image: url(${bgImageTablet});
+    }
+    @media (max-width: ${tablet_px}) {
+      background-image: url(${bgImageMobile});
     }
   `;
 
   const Content = styled.div`
     display: grid;
-    width: clamp(320px, 100vw, 1600px);
+    width: clamp(320px, 100vw, 1440px);
     height: 100%;
     margin: 0 auto;
     padding: 0;

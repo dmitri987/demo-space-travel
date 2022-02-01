@@ -22,34 +22,38 @@ const Content = styled.section`
   display: grid;
   grid-template-columns: min-content auto;
   grid-template-areas: "info action";
-  gap: 2rem;
-  align-items: end;
-  justify-content: space-between;
-  margin-block-start: 20vh;
-  margin-inline: 10vw;
-  min-height: 50vh;
+  gap: 10vw;
+  align-items: center;
+  justify-content: center;
+  margin-block-start: 10vh;
+  margin-block-end: 10rem;
+  margin-inline: clamp(5rem, 10vw, 10rem);
   color: rgba(var(--color-white));
 
   @media (max-width: ${desktop}) {
     grid-template-columns: min-content;
+    grid-template-rows: auto auto;
     grid-template-areas:
       "info"
       "action";
     margin-block-start: 10vh;
     justify-content: center;
     justify-items: center;
-    gap: 15vh;
+    gap: 10rem;
   }
 
   @media (max-width: ${tablet}) {
-    grid-template-columns: 22rem;
-    margin-block-start: 8vh;
+    grid-template-columns: clamp(15rem, 80vw, 25rem);
+    align-content: start;
+    margin-block-start: 4vh;
+    margin-inline: 8vw;
   }
 `;
 
 const Subtitle = styled.h5`
   font-size: 28px;
   letter-spacing: 4.72px;
+  color: var(--color-gray);
 
   @media (max-width: ${desktop}) {
     font-size: 20px;

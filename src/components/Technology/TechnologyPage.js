@@ -36,11 +36,10 @@ const Content = styled.section`
     " .    .   image";
   grid-template-columns: 6rem 1fr 1fr;
   gap: 3rem;
-  /* width: 100%; */
-  margin-block-start: 10%;
+  margin-block-start: 20vh;
+  margin-block-end: 5rem;
   margin-inline-start: 4rem;
   justify-content: space-between;
-  /* align-self: center; */
   color: rgba(var(--color-gray));
 
   @media (max-width: ${desktop_px}) {
@@ -77,7 +76,6 @@ const Title = styled.h3`
 const Info = styled.div`
   display: grid;
   grid-template-areas: "subheader" "header" "description";
-  /* gap: 1rem; */
   max-width: 30rem;
   text-align: start;
   justify-self: start;

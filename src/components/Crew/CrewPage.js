@@ -35,7 +35,6 @@ const crew = [
   {
     url: "#mark_shuttleworth",
     image: markShuttleworthImage,
-    imageWidth: "30rem",
     rank: "mission specialist",
     name: "Mark Shuttleworth",
     description:
@@ -52,7 +51,6 @@ const crew = [
   {
     url: "#anousheh_ansari",
     image: anoushehAnsariImage,
-    imageWidth: "40rem",
     rank: "flight engineer",
     name: "Anousheh Ansari",
     description:
@@ -66,22 +64,22 @@ const Content = styled.section`
   grid-template-columns: 1fr 1fr;
   justify-content: center;
   height: 100%;
-  margin-inline: 8vw;
-  /* gap: 2rem; */
+  margin-inline: calc(5rem);
 
   @media (max-width: ${desktop}) {
     grid-template-areas: "info" "image";
     grid-template-columns: 40rem;
-    grid-template-rows: 30vh 1fr;
+    grid-template-rows: auto 1fr;
     justify-content: center;
     gap: 0;
   }
 
   @media (max-width: ${tablet}) {
     grid-template-areas: "image" "info";
-    grid-template-columns: clamp(320px, 80vw, 25rem);
-    grid-template-rows: 50% 1fr;
+    grid-template-columns: clamp(300px, 80vw, 25rem);
+    /* grid-template-rows: 50% 1fr; */
     gap: 1rem;
+    margin-inline: auto;
   }
 `;
 
@@ -89,14 +87,8 @@ const Info = styled.div`
   grid-area: info;
   display: grid;
   grid-template-areas: "rank" "name" "description" "tabs";
-  /* display: flex;
-  flex-direction: column; */
   align-content: end;
-  /* justify-content: space-between; */
-  /* justify-items: start; */
   text-align: start;
-  /* height: 100%; */
-  /* margin-top: 10rem; */
   margin-bottom: 3rem;
   justify-self: start;
 
@@ -104,6 +96,7 @@ const Info = styled.div`
     margin-block: 1rem;
     text-align: center;
     align-items: center;
+    align-content: end;
     justify-self: center;
     align-self: end;
     justify-content: start;
@@ -134,7 +127,6 @@ const Name = styled.h3`
 const Description = styled.p`
   grid-area: "description";
   max-width: 30rem;
-  /* color: rgba(var(--color-gray-rgb)); */
   margin-top: 1rem;
   margin-bottom: 6rem;
 
@@ -144,16 +136,7 @@ const Description = styled.p`
   }
 `;
 
-const ImageSection = styled.div`
-  display: grid;
-  justify-content: center;
-  position: relative;
-`;
-
 const Image = styled.img`
-  position: absolute;
-  left: 0;
-  bottom: 0;
   grid-area: image;
   max-width: 40rem;
   align-self: end;
@@ -166,7 +149,6 @@ const Image = styled.img`
   }
   @media (max-width: ${tablet}) {
     max-width: 100%;
-    /* align-self: center; */
   }
 `;
 
@@ -176,7 +158,7 @@ const Crew = () => {
     crew.findIndex((p) => p.url === hash),
     0
   );
-  const { rank, name, image, description, imageWidth } = crew[index];
+  const { rank, name, image, description } = crew[index];
 
   return (
     <Page>
@@ -194,14 +176,10 @@ const Crew = () => {
             style={{ height: "6rem", gridArea: "tabs" }}
           />
         </Info>
-        {/* <div>placeholder</div> */}
-        <ImageSection>
-          <Image src={image} alt="" />
-        </ImageSection>
+        <Image src={image} alt="" />
       </Content>
     </Page>
   );
 };
-// style={{ width: imageWidth }}
 
 export default Crew;
