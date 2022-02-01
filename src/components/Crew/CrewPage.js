@@ -77,7 +77,7 @@ const Content = styled.section`
   @media (max-width: ${tablet}) {
     grid-template-areas: "image" "info";
     grid-template-columns: clamp(300px, 80vw, 25rem);
-    /* grid-template-rows: 50% 1fr; */
+    grid-template-rows: minmax(38rem, auto) 1fr;
     gap: 1rem;
     margin-inline: auto;
   }
