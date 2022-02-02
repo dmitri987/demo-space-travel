@@ -3,13 +3,17 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { createPage } from "../Page";
 import Navs from "../Navs/Tabs";
-import bgImageDesktop from "./bg-destination-desktop.webp";
-import bgImageTablet from "./bg-destination-tablet.webp";
-import bgImageMobile from "./bg-destination-mobile.webp";
-import moonImage from "./moon.webp";
-import marsImage from "./mars.webp";
-import europaImage from "./europa.webp";
-import titanImage from "./titan.webp";
+import bgImageDesktop from "./bg-destination-desktop.jpg";
+import bgImageTablet from "./bg-destination-tablet.jpg";
+import bgImageMobile from "./bg-destination-mobile.jpg";
+import moonImage from "./moon.png";
+import marsImage from "./mars.png";
+import europaImage from "./europa.png";
+import titanImage from "./titan.png";
+import moonImageWebP from "./moon.webp";
+import marsImageWebP from "./mars.webp";
+import europaImageWebP from "./europa.webp";
+import titanImageWebP from "./titan.webp";
 import data from "../../data.json";
 
 const Page = createPage({
@@ -26,10 +30,10 @@ const tablet = data.breakpoints.tablet + "px";
 const Content = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin-inline: 8vw;
+  margin-inline: 5rem;
   justify-content: space-between;
-  margin-block-start: 12vh;
-  margin-block-end: 5rem;
+  margin-block-start: 6vh;
+  margin-block-end: 12vh;
   align-self: start;
   text-align: start;
   gap: 8vw;
@@ -38,7 +42,7 @@ const Content = styled.div`
   @media (max-width: ${desktop}) {
     grid-template-columns: 70vw;
     grid-template-rows: auto 1fr;
-    margin-block-start: 0;
+    margin-block-start: 3vh;
     justify-items: center;
     justify-content: center;
     align-self: start;
@@ -49,7 +53,8 @@ const Content = styled.div`
   @media (max-width: ${tablet}) {
     grid-template-columns: 80vw;
     grid-template-rows: auto 1fr;
-    margin-block-end: 2vh;
+    margin-inline: 0;
+    /* margin-block-end: 5rem; */
     /* margin-inline: 5vw; */
   }
 `;
@@ -64,23 +69,24 @@ const Info = styled.div`
   @media (max-width: ${desktop}) {
     justify-items: center;
     align-content: start;
-    gap: 1rem;
+    max-width: 40rem;
+    /* gap: 1rem; */
   }
 `;
 
-const Image = styled.img`
-  max-height: 100%;
-  max-width: 100%;
-  /* max-height: calc(20rem + 5vw);
-  max-width: calc(20rem + 5vw); */
+const Picture = styled.picture`
+  height: 25rem;
+  /* max-height: 100%;
+  max-width: 100%; */
   aspect-ratio: 1;
-  justify-self: center;
+  justify-self: end;
+  /* margin: 1rem; */
 
   @media (max-width: ${desktop}) {
-    max-height: 20rem;
-    max-width: 20rem;
+    height: 20rem;
     align-self: center;
-    margin-block: 2rem;
+    justify-self: center;
+    /* margin-block: 2rem; */
   }
 
   @media (max-width: ${tablet}) {
@@ -118,7 +124,7 @@ const StatSection = styled.div`
 const Delimiter = styled.hr`
   width: 100%;
   border-color: rgba(var(--color-gray-rgb) / 20%);
-  margin-top: 3rem;
+  margin-top: 2.25rem;
 `;
 
 const planets = [
@@ -126,6 +132,7 @@ const planets = [
     title: "moon",
     url: "#moon",
     image: moonImage,
+    imageWebP: moonImageWebP,
     description:
       "See our planet as you’ve never seen it before. A perfect relaxing trip away to help regain perspective and come back refreshed. While you’re there, take in some history by visiting the Luna 2 and Apollo 11 landing sites.",
     avgDistance: "384,400 km",
@@ -135,6 +142,7 @@ const planets = [
     title: "mars",
     url: "#mars",
     image: marsImage,
+    imageWebP: marsImageWebP,
     description:
       "Don’t forget to pack your hiking boots. You’ll need them to tackle Olympus Mons, the tallest planetary mountain in our solar system. It’s two and a half times the size of Everest!",
     avgDistance: "225 MIL. km",
@@ -144,6 +152,7 @@ const planets = [
     title: "europa",
     url: "#europa",
     image: europaImage,
+    imageWebP: europaImageWebP,
     description:
       "The smallest of the four Galilean moons orbiting Jupiter, Europa is a winter lover’s dream. With an icy surface, it’s perfect for a bit of ice skating, curling, hockey, or simple relaxation in your snug wintery cabin.",
     avgDistance: "628 MIL. km",
@@ -153,6 +162,7 @@ const planets = [
     title: "titan",
     url: "#titan",
     image: titanImage,
+    imageWebP: titanImageWebP,
     description:
       "The only moon known to have a dense atmosphere other than Earth, Titan is a home away from home (just a few hundred degrees colder!). As a bonus, you get striking views of the Rings of Saturn.",
     avgDistance: "1.6 bil. km",
@@ -166,19 +176,26 @@ const Destination = () => {
     planets.findIndex((p) => p.url === hash),
     0
   );
-  const { title, image, description, avgDistance, estTravelTime } =
+  const { title, image, imageWebP, description, avgDistance, estTravelTime } =
     planets[index];
 
   return (
     <Page>
       <Content>
-        <Image src={image} alt="" />
+        <Picture>
+          <source srcSet={imageWebP} type="image/webp" />
+          <img src={image} style={{ width: "100%" }} alt="" />
+        </Picture>
         <Info>
           <Navs
             items={planets}
             tabs
             activeItem={index}
-            style={{ height: "2.8rem", marginBottom: "2rem" }}
+            style={{
+              height: "2.5rem",
+              marginBottom: "1.5rem",
+              marginTop: "0.5rem",
+            }}
           />
           <h2 className="text-white">{title}</h2>
           <p>{description}</p>

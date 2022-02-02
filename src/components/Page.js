@@ -11,12 +11,13 @@ const desktop_px = desktop + "px";
 
 const StyledHeading = styled.h5`
   margin-inline-start: 3rem;
-  margin-block-end: 4rem;
+  /* margin-block-end: 4rem; */
   font-family: "Barlow Condensed", sans-serif;
   font-style: normal;
   font-weight: normal;
   text-align: start;
   color: var(--color-white);
+  align-self: center;
 
   font-size: 28px;
   letter-spacing: 4.72px;
@@ -27,6 +28,8 @@ const StyledHeading = styled.h5`
   }
 
   @media (max-width: ${tablet_px}) {
+    margin-inline-start: 0;
+    text-align: center;
     font-size: 16px;
     letter-spacing: 2.7px;
   }
@@ -63,7 +66,12 @@ export const createPage = ({
 
   const Page = styled.div`
     display: grid;
-    ${() => gridTemlateRows("12rem", "6rem", "1fr")}
+    ${() =>
+      gridTemlateRows(
+        "clamp(8rem, 15vh, 10rem)",
+        "clamp(5rem, 10vh, 7rem)",
+        "1fr"
+      )}
     align-items: start;
     min-height: 100vh;
     width: 100vw;
@@ -74,19 +82,18 @@ export const createPage = ({
     background-image: url(${bgImageDesktop});
 
     @media (max-width: ${desktop_px}) {
-      ${() => gridTemlateRows("8rem", "4rem", "1fr")}
-      /* grid-template-rows: 8rem 4rem 1fr; */
-      /* overflow: auto; */
+      ${() => gridTemlateRows("auto", "4rem", "1fr")}
       background-image: url(${bgImageTablet});
     }
     @media (max-width: ${tablet_px}) {
+      ${() => gridTemlateRows("5rem", "5rem", "1fr")}
       background-image: url(${bgImageMobile});
     }
   `;
 
   const Content = styled.div`
     display: grid;
-    width: clamp(320px, 100vw, 1440px);
+    width: clamp(320px, 100vw, 1450px);
     height: 100%;
     margin: 0 auto;
     padding: 0;
@@ -101,9 +108,9 @@ export const createPage = ({
     }, []);
 
     const styles = {
-      mobile: viewportWidth < tablet,
-      tablet: viewportWidth < desktop,
-      desktop: viewportWidth >= desktop,
+      mobile: viewportWidth <= tablet,
+      tablet: viewportWidth <= desktop,
+      desktop: viewportWidth > desktop,
     };
 
     return (

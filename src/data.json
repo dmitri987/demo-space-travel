@@ -1,7 +1,7 @@
 {
   "breakpoints": {
-    "desktop": 1024,
-    "tablet": 750
+    "desktop": 1023,
+    "tablet": 749
   },
   "navBar": [
     { "title": "home", "url": "/" },

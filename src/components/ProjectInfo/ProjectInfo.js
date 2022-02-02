@@ -3,7 +3,7 @@ import styled from "styled-components";
 import icon from "./toggle_icon.svg";
 import closeIcon from "./close_icon.svg";
 
-const DURATION = ".5";
+const DURATION = ".3";
 
 const Backdrop = styled.div`
   display: grid;

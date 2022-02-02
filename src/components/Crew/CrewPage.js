@@ -3,13 +3,17 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { createPage } from "../Page";
 import Navs from "../Navs/Bullets";
-import bgImageDesktop from "./bg-crew-desktop.webp";
-import bgImageTablet from "./bg-crew-tablet.webp";
-import bgImageMobile from "./bg-crew-mobile.webp";
-import anoushehAnsariImage from "./anousheh-ansari.webp";
-import douglasHurleyImage from "./douglas-hurley.webp";
-import markShuttleworthImage from "./mark-shuttleworth.webp";
-import victorGloverImage from "./victor-glover.webp";
+import bgImageDesktop from "./bg-crew-desktop.jpg";
+import bgImageTablet from "./bg-crew-tablet.jpg";
+import bgImageMobile from "./bg-crew-mobile.jpg";
+import anoushehAnsariImage from "./anousheh-ansari.png";
+import douglasHurleyImage from "./douglas-hurley.png";
+import markShuttleworthImage from "./mark-shuttleworth.png";
+import victorGloverImage from "./victor-glover.png";
+import anoushehAnsariImageWebP from "./anousheh-ansari.webp";
+import douglasHurleyImageWebP from "./douglas-hurley.webp";
+import markShuttleworthImageWebP from "./mark-shuttleworth.webp";
+import victorGloverImageWebP from "./victor-glover.webp";
 import data from "../../data.json";
 
 const Page = createPage({
@@ -27,6 +31,7 @@ const crew = [
   {
     url: "#douglas_hurley",
     image: douglasHurleyImage,
+    imageWebP: douglasHurleyImageWebP,
     rank: "commander",
     name: "Douglas Hurley",
     description:
@@ -35,6 +40,7 @@ const crew = [
   {
     url: "#mark_shuttleworth",
     image: markShuttleworthImage,
+    imageWebP: markShuttleworthImageWebP,
     rank: "mission specialist",
     name: "Mark Shuttleworth",
     description:
@@ -43,6 +49,7 @@ const crew = [
   {
     url: "#victor_glover",
     image: victorGloverImage,
+    imageWebP: victorGloverImageWebP,
     rank: "pilot",
     name: "Victor Glover",
     description:
@@ -51,6 +58,7 @@ const crew = [
   {
     url: "#anousheh_ansari",
     image: anoushehAnsariImage,
+    imageWebP: anoushehAnsariImageWebP,
     rank: "flight engineer",
     name: "Anousheh Ansari",
     description:
@@ -61,24 +69,26 @@ const crew = [
 const Content = styled.section`
   display: grid;
   grid-template-areas: "info image";
-  grid-template-columns: 1fr 1fr;
-  justify-content: center;
+  grid-template-columns: auto minmax(30rem, auto);
+  justify-content: start;
+  justify-items: start;
   height: 100%;
-  margin-inline: 5rem;
+  margin-inline-start: 10vw;
+  /* gap: 5vw; */
 
   @media (max-width: ${desktop}) {
     grid-template-areas: "info" "image";
     grid-template-columns: 40rem;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto 50vh;
     justify-content: center;
     gap: 0;
+    margin-inline-start: 0;
   }
 
   @media (max-width: ${tablet}) {
     grid-template-areas: "image" "info";
     grid-template-columns: clamp(300px, 80vw, 25rem);
-    grid-template-rows: minmax(38rem, auto) 1fr;
-    gap: 1rem;
+    grid-template-rows: 35vh 1fr;
     margin-inline: auto;
   }
 `;
@@ -107,6 +117,8 @@ const Info = styled.div`
     align-self: start;
     grid-template-areas: "tabs" "rank" "name" "description";
     margin-block-end: 5rem;
+    margin-block-start: 0;
+    border-block-start: 1px solid rgba(var(--color-white-rgb) / 15%);
   }
 `;
 
@@ -118,7 +130,7 @@ const Rank = styled.h4`
 const Name = styled.h3`
   grid-area: "name";
   color: rgba(var(--color-white));
-  margin-block: 0.5rem;
+  /* margin-block: 0.5vh; */
 
   @media (max-width: ${desktop}) {
     margin-block: 0.5rem;
@@ -129,27 +141,35 @@ const Description = styled.p`
   grid-area: "description";
   max-width: 30rem;
   margin-top: 1rem;
-  margin-bottom: 6rem;
+  margin-bottom: 6vh;
 
   @media (max-width: ${desktop}) {
     max-width: 100%;
     margin-bottom: 0;
+    margin-top: 0.5rem;
   }
 `;
 
-const Image = styled.img`
+const Picture = styled.picture`
   grid-area: image;
-  max-width: 40rem;
+  height: 100%;
+  max-height: clamp(30rem, 66vh, 35rem);
   align-self: end;
-  justify-self: start;
+  justify-self: center;
+  margin-inline: 5rem;
+  overflow: hidden;
 
   @media (max-width: ${desktop}) {
     position: relative;
-    max-width: 35rem;
+    max-height: 100%;
     justify-self: center;
   }
   @media (max-width: ${tablet}) {
-    max-width: 100%;
+    /* height: 30vh; */
+    /* max-width: 15rem; */
+    /* width: 100%; */
+    /* max-width: 10rem; */
+    /* max-height: 45vh; */
   }
 `;
 
@@ -159,7 +179,7 @@ const Crew = () => {
     crew.findIndex((p) => p.url === hash),
     0
   );
-  const { rank, name, image, description } = crew[index];
+  const { rank, name, image, imageWebP, description } = crew[index];
 
   return (
     <Page>
@@ -174,10 +194,13 @@ const Crew = () => {
             items={crew}
             bullets
             activeItem={index}
-            style={{ height: "6rem", gridArea: "tabs" }}
+            style={{ height: "4rem", gridArea: "tabs" }}
           />
         </Info>
-        <Image src={image} alt="" />
+        <Picture>
+          <source srcSet={imageWebP} type="image/webp" />
+          <img src={image} style={{ height: "100%" }} alt="" />
+        </Picture>
       </Content>
     </Page>
   );

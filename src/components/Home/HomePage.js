@@ -3,9 +3,9 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { createPage } from "../Page";
 import ActionButton from "../ActionButton/ActionButton";
-import bgImageDesktop from "./bg-home-desktop.webp";
-import bgImageTablet from "./bg-home-tablet.webp";
-import bgImageMobile from "./bg-home-mobile.webp";
+import bgImageDesktop from "./bg-home-desktop.jpg";
+import bgImageTablet from "./bg-home-tablet.jpg";
+import bgImageMobile from "./bg-home-mobile.jpg";
 import data from "../../data.json";
 
 const Page = createPage({
@@ -26,7 +26,7 @@ const Content = styled.section`
   align-items: center;
   justify-content: center;
   margin-block-start: 8vh;
-  margin-block-end: 10rem;
+  margin-block-end: 12vh;
   margin-inline: clamp(5rem, 10vw, 10rem);
   color: rgba(var(--color-white));
 
@@ -36,10 +36,13 @@ const Content = styled.section`
     grid-template-areas:
       "info"
       "action";
-    margin-block-start: 10vh;
+    margin-block-start: 5vh;
+    /* margin-block: 10vh; */
+
+    align-self: center;
     justify-content: center;
     justify-items: center;
-    gap: 10rem;
+    gap: 10vh;
   }
 
   @media (max-width: ${tablet}) {
