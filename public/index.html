@@ -3,6 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.svg" />
+    <!-- <link rel="preload" as="image" href="assets/Home/bg-home-desktop.jpg" />
+    <link
+      rel="preload"
+      as="image"
+      href="assets/Destination/bg-destination-desktop.jpg"
+    />
+    <link rel="preload" as="image" href="assets/Crew/bg-crew-desktop.jpg" />
+    <link
+      rel="preload"
+      as="image"
+      href="assets/Technology/bg-technology-desktop.jpg"
+    /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
@@ -11,7 +23,17 @@
     />
     <title>Space Travel</title>
   </head>
-  <body style="overflow-x: hidden">
+  <body>
+    <style>
+      body {
+        overflow-y: auto;
+      }
+      @media (min-width: 1024px) {
+        body {
+          overflow-y: hidden;
+        }
+      }
+    </style>
     <div id="root"></div>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <!--

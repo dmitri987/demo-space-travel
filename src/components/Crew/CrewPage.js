@@ -1,80 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { createPage } from "../Page";
 import Navs from "../Navs/Bullets";
-import bgImageDesktop from "./bg-crew-desktop.jpg";
-import bgImageTablet from "./bg-crew-tablet.jpg";
-import bgImageMobile from "./bg-crew-mobile.jpg";
-import anoushehAnsariImage from "./anousheh-ansari.png";
-import douglasHurleyImage from "./douglas-hurley.png";
-import markShuttleworthImage from "./mark-shuttleworth.png";
-import victorGloverImage from "./victor-glover.png";
-import anoushehAnsariImageWebP from "./anousheh-ansari.webp";
-import douglasHurleyImageWebP from "./douglas-hurley.webp";
-import markShuttleworthImageWebP from "./mark-shuttleworth.webp";
-import victorGloverImageWebP from "./victor-glover.webp";
 import data from "../../data.json";
-
-const Page = createPage({
-  activePageIndex: 2,
-  heading: "meet your crew",
-  bgImageDesktop,
-  bgImageTablet,
-  bgImageMobile,
-});
+import { preload, isWebpSupported } from "../../helpers";
 
 const tablet = data.breakpoints.tablet + "px";
 const desktop = data.breakpoints.desktop + "px";
 
-const crew = [
-  {
-    url: "#douglas_hurley",
-    image: douglasHurleyImage,
-    imageWebP: douglasHurleyImageWebP,
-    rank: "commander",
-    name: "Douglas Hurley",
-    description:
-      "Douglas Gerald Hurley is an American engineer, former Marine Corps pilot and former NASA astronaut. He launched into space for the third time as commander of Crew Dragon Demo-2.",
-  },
-  {
-    url: "#mark_shuttleworth",
-    image: markShuttleworthImage,
-    imageWebP: markShuttleworthImageWebP,
-    rank: "mission specialist",
-    name: "Mark Shuttleworth",
-    description:
-      "Mark Richard Shuttleworth is the founder and CEO of Canonical, the company behind the Linux-based Ubuntu operating system. Shuttleworth became the first South African to travel to space as a space tourist.",
-  },
-  {
-    url: "#victor_glover",
-    image: victorGloverImage,
-    imageWebP: victorGloverImageWebP,
-    rank: "pilot",
-    name: "Victor Glover",
-    description:
-      "Pilot on the first operational flight of the SpaceX Crew Dragon to the International Space Station. Glover is a commander in the U.S. Navy where he pilots an F/A-18.He was a crew member of Expedition 64, and served as a station systems flight engineer. ",
-  },
-  {
-    url: "#anousheh_ansari",
-    image: anoushehAnsariImage,
-    imageWebP: anoushehAnsariImageWebP,
-    rank: "flight engineer",
-    name: "Anousheh Ansari",
-    description:
-      "Anousheh Ansari is an Iranian American engineer and co-founder of Prodea Systems. Ansari was the fourth self-funded space tourist, the first self-funded woman to fly to the ISS, and the first Iranian in space. ",
-  },
-];
-
 const Content = styled.section`
   display: grid;
   grid-template-areas: "info image";
-  grid-template-columns: auto minmax(30rem, auto);
+  grid-template-columns: minmax(25rem, 35rem) 1fr;
   justify-content: start;
   justify-items: start;
-  height: 100%;
-  margin-inline-start: 10vw;
-  /* gap: 5vw; */
+  height: clamp(450px, 75vh, 675px);
+  max-width: 1150px;
+  margin-inline-start: 8vw;
+  margin-inline-end: 5vw;
+  gap: 2vw;
 
   @media (max-width: ${desktop}) {
     grid-template-areas: "info" "image";
@@ -101,6 +46,8 @@ const Info = styled.div`
   text-align: start;
   margin-bottom: 3rem;
   justify-self: start;
+  max-width: 50rem;
+  min-width: 30rem;
 
   @media (max-width: ${desktop}) {
     margin-block: 1rem;
@@ -139,9 +86,9 @@ const Name = styled.h3`
 
 const Description = styled.p`
   grid-area: "description";
-  max-width: 30rem;
+  max-width: 25rem;
   margin-top: 1rem;
-  margin-bottom: 6vh;
+  /* margin-bottom: 6vh; */
 
   @media (max-width: ${desktop}) {
     max-width: 100%;
@@ -150,19 +97,23 @@ const Description = styled.p`
   }
 `;
 
-const Picture = styled.picture`
+const Image = styled.img`
   grid-area: image;
-  height: 100%;
-  max-height: clamp(30rem, 66vh, 35rem);
+  /* height: 100%; */
+  /* height: 80%; */
+  width: clamp(20rem, 100%, 30rem);
+  max-height: 100%;
+  border-bottom: 1px solid rgba(var(--color-white-rgb) / 15%);
   align-self: end;
-  justify-self: center;
-  margin-inline: 5rem;
+  justify-self: start;
+  /* margin-inline: 5rem; */
   overflow: hidden;
 
   @media (max-width: ${desktop}) {
     position: relative;
     max-height: 100%;
     justify-self: center;
+    border-bottom: none;
   }
   @media (max-width: ${tablet}) {
     /* height: 30vh; */
@@ -173,13 +124,62 @@ const Picture = styled.picture`
   }
 `;
 
+const pageName = "crew";
+
+const crew = [
+  {
+    url: "#douglas_hurley",
+    rank: "commander",
+    name: "Douglas Hurley",
+    description:
+      "Douglas Gerald Hurley is an American engineer, former Marine Corps pilot and former NASA astronaut. He launched into space for the third time as commander of Crew Dragon Demo-2.",
+  },
+  {
+    url: "#mark_shuttleworth",
+    rank: "mission specialist",
+    name: "Mark Shuttleworth",
+    description:
+      "Mark Richard Shuttleworth is the founder and CEO of Canonical, the company behind the Linux-based Ubuntu operating system. Shuttleworth became the first South African to travel to space as a space tourist.",
+  },
+  {
+    url: "#victor_glover",
+    rank: "pilot",
+    name: "Victor Glover",
+    description:
+      "Pilot on the first operational flight of the SpaceX Crew Dragon to the International Space Station. Glover is a commander in the U.S. Navy where he pilots an F/A-18.He was a crew member of Expedition 64, and served as a station systems flight engineer. ",
+  },
+  {
+    url: "#anousheh_ansari",
+    rank: "flight engineer",
+    name: "Anousheh Ansari",
+    description:
+      "Anousheh Ansari is an Iranian American engineer and co-founder of Prodea Systems. Ansari was the fourth self-funded space tourist, the first self-funded woman to fly to the ISS, and the first Iranian in space. ",
+  },
+];
+
+const Page = createPage({
+  activePageIndex: 2,
+  heading: "meet your crew",
+  pageName,
+});
+
+const path = (fileName) => `assets/${pageName}/${fileName}`;
+const kebab = (name) => name.toLowerCase().replace(" ", "-");
+const imageUrl = (name, ext) => path(`${kebab(name)}.${ext}`);
+
 const Crew = () => {
   const { hash } = useLocation();
   const index = Math.max(
     crew.findIndex((p) => p.url === hash),
     0
   );
-  const { rank, name, image, imageWebP, description } = crew[index];
+
+  const { rank, name, description } = crew[index];
+  const ext = isWebpSupported() ? "webp" : "jpg";
+
+  useEffect(() => {
+    preload([...crew.map(({ name }) => imageUrl(name, ext))]);
+  }, [ext]);
 
   return (
     <Page>
@@ -194,13 +194,10 @@ const Crew = () => {
             items={crew}
             bullets
             activeItem={index}
-            style={{ height: "4rem", gridArea: "tabs" }}
+            style={{ height: "8rem", gridArea: "tabs" }}
           />
         </Info>
-        <Picture>
-          <source srcSet={imageWebP} type="image/webp" />
-          <img src={image} style={{ height: "100%" }} alt="" />
-        </Picture>
+        <Image src={imageUrl(name, ext)} alt="" />
       </Content>
     </Page>
   );

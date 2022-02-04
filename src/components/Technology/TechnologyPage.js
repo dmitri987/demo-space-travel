@@ -1,32 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { createPage } from "../Page";
 import Navs from "../Navs/Rounds";
-import bgImageDesktop from "./bg-technology-desktop.jpg";
-import bgImageTablet from "./bg-technology-tablet.jpg";
-import bgImageMobile from "./bg-technology-mobile.jpg";
-import launchVehicleDesktopImage from "./launch-vehicle-desktop.jpg";
-import launchVehicleTabletImage from "./launch-vehicle-tablet.jpg";
-import spaceCapsuleDesktopImage from "./space-capsule-desktop.jpg";
-import spaceCapsuleTabletImage from "./space-capsule-tablet.jpg";
-import spaceportDesktopImage from "./spaceport-desktop.jpg";
-import spaceportTabletImage from "./spaceport-tablet.jpg";
-import launchVehicleDesktopImageWebP from "./launch-vehicle-desktop.webp";
-import launchVehicleTabletImageWebP from "./launch-vehicle-tablet.webp";
-import spaceCapsuleDesktopImageWebP from "./space-capsule-desktop.webp";
-import spaceCapsuleTabletImageWebP from "./space-capsule-tablet.webp";
-import spaceportDesktopImageWebP from "./spaceport-desktop.webp";
-import spaceportTabletImageWebP from "./spaceport-tablet.webp";
 import data from "../../data.json";
-
-const Page = createPage({
-  activePageIndex: 3,
-  heading: "space launch 101",
-  bgImageDesktop,
-  bgImageTablet,
-  bgImageMobile,
-});
+import { preload, isWebpSupported } from "../../helpers";
 
 const tablet = data.breakpoints.tablet;
 const desktop = data.breakpoints.desktop;
@@ -120,7 +98,7 @@ const Info = styled.div`
   }
 `;
 
-const Picture = styled.picture`
+const Image = styled.img`
   grid-area: image;
   max-width: 40vw;
   justify-self: end;
@@ -132,38 +110,38 @@ const Picture = styled.picture`
   }
 `;
 
+const pageName = "technology";
+const path = (fileName) => `assets/${pageName}/${fileName}`;
+
+const Page = createPage({
+  activePageIndex: 3,
+  heading: "space launch 101",
+  pageName,
+});
+
+const entry = (name, description) => ({
+  url: `#${name.replace(" ", "_")}`,
+  name,
+  description,
+});
+
 const technology = [
-  {
-    url: "#launch_vehicle",
-    name: "launch vehicle",
-    imageDesktop: launchVehicleDesktopImage,
-    imageTablet: launchVehicleTabletImage,
-    imageDesktopWebP: launchVehicleDesktopImageWebP,
-    imageTabletWebP: launchVehicleTabletImageWebP,
-    description:
-      "A launch vehicle or carrier rocket is a rocket-propelled vehicle used to carry a payload from Earth's surface to space, usually to Earth orbit or beyond. Our WEB-X carrier rocket is the most powerful in operation. Standing 150 metres tall, it's quite an awe-inspiring sight on the launch pad!",
-  },
-  {
-    url: "#spaceport",
-    name: "spaceport",
-    imageDesktop: spaceportDesktopImage,
-    imageTablet: spaceportTabletImage,
-    imageDesktopWebP: spaceportDesktopImageWebP,
-    imageTabletWebP: spaceportTabletImageWebP,
-    description:
-      "A spaceport or cosmodrome is a site for launching (or receiving) spacecraft, by analogy to the seaport for ships or airport for aircraft. Based in the famous Cape Canaveral, our spaceport is ideally situated to take advantage of the Earth’s rotation for launch.",
-  },
-  {
-    url: "#space_capsule",
-    name: "space capsule",
-    imageDesktop: spaceCapsuleDesktopImage,
-    imageTablet: spaceCapsuleTabletImage,
-    imageDesktopWebP: spaceCapsuleDesktopImageWebP,
-    imageTabletWebP: spaceCapsuleTabletImageWebP,
-    description:
-      "A space capsule is an often-crewed spacecraft that uses a blunt-body reentry capsule to reenter the Earth's atmosphere without wings. Our capsule is where you'll spend your time during the flight. It includes a space gym, cinema, and plenty of other activities to keep you entertained.",
-  },
+  entry(
+    "launch vehicle",
+    "A launch vehicle or carrier rocket is a rocket-propelled vehicle used to carry a payload from Earth's surface to space, usually to Earth orbit or beyond. Our WEB-X carrier rocket is the most powerful in operation. Standing 150 metres tall, it's quite an awe-inspiring sight on the launch pad!"
+  ),
+  entry(
+    "spaceport",
+    "A spaceport or cosmodrome is a site for launching (or receiving) spacecraft, by analogy to the seaport for ships or airport for aircraft. Based in the famous Cape Canaveral, our spaceport is ideally situated to take advantage of the Earth’s rotation for launch."
+  ),
+  entry(
+    "space-capsule",
+    "A space capsule is an often-crewed spacecraft that uses a blunt-body reentry capsule to reenter the Earth's atmosphere without wings. Our capsule is where you'll spend your time during the flight. It includes a space gym, cinema, and plenty of other activities to keep you entertained."
+  ),
 ];
+
+const kebab = (str) => str.replace(" ", "-");
+const imageUrl = (name, size, ext) => path(`${kebab(name)}-${size}.${ext}`);
 
 const Technology = ({ viewportWidth }) => {
   const { hash } = useLocation();
@@ -171,14 +149,16 @@ const Technology = ({ viewportWidth }) => {
     technology.findIndex((p) => p.url === hash),
     0
   );
-  const {
-    name,
-    imageDesktop,
-    imageTablet,
-    imageDesktopWebP,
-    imageTabletWebP,
-    description,
-  } = technology[index];
+
+  const { name, description } = technology[index];
+
+  const size = viewportWidth > desktop ? "desktop" : "tablet";
+  const ext = isWebpSupported() ? "webp" : "jpg";
+
+  useEffect(() => {
+    preload([...technology.map(({ name }) => imageUrl(name, size, ext))]);
+  }, [size, ext]);
+
   return (
     <Page>
       <Content>
@@ -192,19 +172,7 @@ const Technology = ({ viewportWidth }) => {
           <Title>{name}</Title>
           <p style={{ gridArea: "description" }}>{description}</p>
         </Info>
-        <Picture>
-          <source
-            srcSet={
-              viewportWidth >= desktop ? imageDesktopWebP : imageTabletWebP
-            }
-            type="image/webp"
-          />
-          <img
-            style={{ width: "100%" }}
-            src={viewportWidth >= desktop ? imageDesktop : imageTablet}
-            alt=""
-          />
-        </Picture>
+        <Image src={imageUrl(name, size, ext)} alt="" />
       </Content>
     </Page>
   );

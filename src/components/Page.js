@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import NavBar from "./NavBar/NavBar";
-import { subscribeViewportWidthObserver } from "../helpers";
+import { subscribeViewportWidthObserver, isWebpSupported } from "../helpers";
 import data from "../data.json";
 
 const tablet = data.breakpoints.tablet;
@@ -48,21 +48,35 @@ const Heading = ({ index, heading }) => (
   </StyledHeading>
 );
 
+// TODO: add background-image: image-set(...)
+//   images are arrays, where [0] is default background
 export const createPage = ({
   activePageIndex,
   heading,
-  bgImageDesktop,
-  bgImageTablet,
-  bgImageMobile,
+  pageName,
+  // isWebpSupported,
+  // bgImageDesktop,
+  // bgImageTablet,
+  // bgImageMobile,
 }) => {
-  const gridTemlateRows = (navBar, title, content) =>
+  const gridTemlateRows = (navBarHeight, headingHeight, contentHeight) =>
     heading
       ? css`
-          grid-template-rows: ${navBar} ${title} ${content};
+          grid-template-rows: ${navBarHeight} ${headingHeight} ${contentHeight};
         `
       : css`
-          grid-template-rows: ${navBar} ${content};
+          grid-template-rows: ${navBarHeight} ${contentHeight};
         `;
+
+  const backgroundImage = (size, ext = "jpg") => {
+    const path = `'assets/${pageName}/bg-${pageName}-${size}.${
+      isWebpSupported() ? "webp" : ext
+    }'`;
+    return css`
+      background-image: url(${path});
+    `;
+  };
+  /* console.log("isWebpSupported", isWebpSupported(), imagePath("desktop")); */
 
   const Page = styled.div`
     display: grid;
@@ -73,21 +87,23 @@ export const createPage = ({
         "1fr"
       )}
     align-items: start;
-    min-height: 100vh;
+    min-height: 900px;
+    height: 100vh;
     width: 100vw;
     background-color: black;
     background-size: cover;
-    background-position: center center;
+    background-position: top left;
+    /* overflow-y: hidden; */
 
-    background-image: url(${bgImageDesktop});
+    ${() => backgroundImage("desktop")}
 
     @media (max-width: ${desktop_px}) {
       ${() => gridTemlateRows("auto", "4rem", "1fr")}
-      background-image: url(${bgImageTablet});
+      ${() => backgroundImage("tablet")}
     }
     @media (max-width: ${tablet_px}) {
       ${() => gridTemlateRows("5rem", "5rem", "1fr")}
-      background-image: url(${bgImageMobile});
+      ${() => backgroundImage("mobile")}
     }
   `;
 
@@ -97,7 +113,7 @@ export const createPage = ({
     height: 100%;
     margin: 0 auto;
     padding: 0;
-    overflow-x: hidden;
+    /* overflow: hidden; */
   `;
 
   return ({ children }) => {

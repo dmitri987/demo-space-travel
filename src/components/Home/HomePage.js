@@ -3,16 +3,13 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { createPage } from "../Page";
 import ActionButton from "../ActionButton/ActionButton";
-import bgImageDesktop from "./bg-home-desktop.jpg";
-import bgImageTablet from "./bg-home-tablet.jpg";
-import bgImageMobile from "./bg-home-mobile.jpg";
 import data from "../../data.json";
+
+// const path = (fileName) => `assets/Home/${fileName}`;
 
 const Page = createPage({
   activePageIndex: 0,
-  bgImageDesktop,
-  bgImageTablet,
-  bgImageMobile,
+  pageName: "home",
 });
 
 const tablet = data.breakpoints.tablet + "px";
