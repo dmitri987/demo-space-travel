@@ -7,13 +7,12 @@ const desktop = data.breakpoints.desktop + "px";
 
 const StyledButton = styled.button`
   width: 274px;
-  height: 274px;
+  aspect-ratio: 1;
   border-radius: 50%;
   border: none;
   outline: 0 solid rgba(var(--color-gray-rgb) / 10%);
   background: var(--color-white);
   cursor: pointer;
-  /* box-sizing: border-box; */
   transition: all 0.2s ease-in-out;
 
   &:hover {
@@ -22,7 +21,6 @@ const StyledButton = styled.button`
 
   @media (max-width: ${desktop}) {
     width: 242px;
-    height: 242px;
 
     &:hover {
       outline-width: 80px;
@@ -31,7 +29,6 @@ const StyledButton = styled.button`
 
   @media (max-width: ${tablet}) {
     width: 150px;
-    height: 150px;
 
     &:hover {
       outline-width: 50px;

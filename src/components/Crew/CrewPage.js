@@ -12,28 +12,26 @@ const desktop = data.breakpoints.desktop + "px";
 const Content = styled.section`
   display: grid;
   grid-template-areas: "info image";
-  grid-template-columns: minmax(25rem, 35rem) 1fr;
+  grid-template-columns: 1fr 1fr;
   justify-content: start;
   justify-items: start;
-  height: clamp(450px, 75vh, 675px);
-  max-width: 1150px;
-  margin-inline-start: 8vw;
-  margin-inline-end: 5vw;
-  gap: 2vw;
+  height: 100%;
+  max-height: 700px;
 
   @media (max-width: ${desktop}) {
     grid-template-areas: "info" "image";
     grid-template-columns: 40rem;
-    grid-template-rows: auto 50vh;
+    grid-template-rows: min-content auto;
     justify-content: center;
     gap: 0;
     margin-inline-start: 0;
+    min-height: 100%;
   }
 
   @media (max-width: ${tablet}) {
     grid-template-areas: "image" "info";
-    grid-template-columns: clamp(300px, 80vw, 25rem);
-    grid-template-rows: 35vh 1fr;
+    grid-template-columns: clamp(300px, 85vw, 25rem);
+    grid-template-rows: 223px 1fr;
     margin-inline: auto;
   }
 `;
@@ -44,13 +42,9 @@ const Info = styled.div`
   grid-template-areas: "rank" "name" "description" "tabs";
   align-content: end;
   text-align: start;
-  margin-bottom: 3rem;
   justify-self: start;
-  max-width: 50rem;
-  min-width: 30rem;
 
   @media (max-width: ${desktop}) {
-    margin-block: 1rem;
     text-align: center;
     align-items: center;
     align-content: end;
@@ -63,64 +57,78 @@ const Info = styled.div`
   @media (max-width: ${tablet}) {
     align-self: start;
     grid-template-areas: "tabs" "rank" "name" "description";
-    margin-block-end: 5rem;
+    padding-block-end: 5rem;
     margin-block-start: 0;
     border-block-start: 1px solid rgba(var(--color-white-rgb) / 15%);
+    width: min(85vw, 350px);
   }
 `;
 
 const Rank = styled.h4`
-  grid-area: "rank";
+  grid-area: rank;
+  margin-bottom: 0.5rem;
   color: rgba(var(--color-white-rgb) / 30%);
+
+  @media (max-width: ${desktop}) {
+    margin-bottom: 0.25rem;
+  }
 `;
 
 const Name = styled.h3`
-  grid-area: "name";
+  grid-area: name;
   color: rgba(var(--color-white));
-  /* margin-block: 0.5vh; */
+  margin-bottom: 1.5rem;
 
   @media (max-width: ${desktop}) {
-    margin-block: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  @media (max-width: ${tablet}) {
+    margin-bottom: 1rem;
   }
 `;
 
 const Description = styled.p`
-  grid-area: "description";
-  max-width: 25rem;
-  margin-top: 1rem;
-  /* margin-bottom: 6vh; */
+  grid-area: description;
+  max-width: clamp(20rem, 32vw, 35rem);
 
   @media (max-width: ${desktop}) {
     max-width: 100%;
-    margin-bottom: 0;
-    margin-top: 0.5rem;
+  }
+`;
+
+const StyledNavs = styled(Navs)`
+  grid-area: tabs;
+  height: auto;
+  margin-block: 10vh;
+
+  @media (max-width: ${desktop}) {
+    margin-block: 4rem;
+  }
+
+  @media (max-width: ${tablet}) {
+    margin-block: 2rem;
   }
 `;
 
 const Image = styled.img`
   grid-area: image;
-  /* height: 100%; */
-  /* height: 80%; */
-  width: clamp(20rem, 100%, 30rem);
-  max-height: 100%;
+  max-height: 70vh;
+  max-width: 45vw;
   border-bottom: 1px solid rgba(var(--color-white-rgb) / 15%);
   align-self: end;
-  justify-self: start;
-  /* margin-inline: 5rem; */
+  justify-self: center;
+  margin-inline-end: 5vw;
   overflow: hidden;
 
   @media (max-width: ${desktop}) {
     position: relative;
-    max-height: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    margin-inline-end: 0;
     justify-self: center;
     border-bottom: none;
-  }
-  @media (max-width: ${tablet}) {
-    /* height: 30vh; */
-    /* max-width: 15rem; */
-    /* width: 100%; */
-    /* max-width: 10rem; */
-    /* max-height: 45vh; */
   }
 `;
 
@@ -163,7 +171,8 @@ const Page = createPage({
   pageName,
 });
 
-const path = (fileName) => `assets/${pageName}/${fileName}`;
+const { assetsDir } = data;
+const path = (fileName) => `${assetsDir}/${pageName}/${fileName}`;
 const kebab = (name) => name.toLowerCase().replace(" ", "-");
 const imageUrl = (name, ext) => path(`${kebab(name)}.${ext}`);
 
@@ -185,17 +194,12 @@ const Crew = () => {
     <Page>
       <Content>
         <Info>
-          <div>
-            <Rank>{rank}</Rank>
-            <Name>{name}</Name>
-            <Description>{description}</Description>
-          </div>
-          <Navs
-            items={crew}
-            bullets
-            activeItem={index}
-            style={{ height: "8rem", gridArea: "tabs" }}
-          />
+          {/* <div> */}
+          <Rank>{rank}</Rank>
+          <Name>{name}</Name>
+          <Description>{description}</Description>
+          {/* </div> */}
+          <StyledNavs items={crew} bullets activeItem={index} />
         </Info>
         <Image src={imageUrl(name, ext)} alt="" />
       </Content>

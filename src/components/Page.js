@@ -10,26 +10,32 @@ const tablet_px = tablet + "px";
 const desktop_px = desktop + "px";
 
 const StyledHeading = styled.h5`
-  margin-inline-start: 3rem;
-  /* margin-block-end: 4rem; */
+  margin-inline-start: 12vw;
   font-family: "Barlow Condensed", sans-serif;
   font-style: normal;
   font-weight: normal;
   text-align: start;
   color: var(--color-white);
-  align-self: center;
+  align-self: end;
+  margin-block-start: min(6vh, 60px);
 
   font-size: 28px;
   letter-spacing: 4.72px;
 
   @media (max-width: ${desktop_px}) {
+    margin-inline-start: 2.5rem;
+    margin-block-start: 40px;
+    margin-block-end: max(5vh, 50px);
     font-size: 20px;
     letter-spacing: 2.38px;
   }
 
   @media (max-width: ${tablet_px}) {
     margin-inline-start: 0;
+    margin-block-start: 0;
+    margin-block-end: 2rem;
     text-align: center;
+    align-self: start;
     font-size: 16px;
     letter-spacing: 2.7px;
   }
@@ -48,17 +54,7 @@ const Heading = ({ index, heading }) => (
   </StyledHeading>
 );
 
-// TODO: add background-image: image-set(...)
-//   images are arrays, where [0] is default background
-export const createPage = ({
-  activePageIndex,
-  heading,
-  pageName,
-  // isWebpSupported,
-  // bgImageDesktop,
-  // bgImageTablet,
-  // bgImageMobile,
-}) => {
+export const createPage = ({ activePageIndex, heading, pageName }) => {
   const gridTemlateRows = (navBarHeight, headingHeight, contentHeight) =>
     heading
       ? css`
@@ -76,44 +72,52 @@ export const createPage = ({
       background-image: url(${path});
     `;
   };
-  /* console.log("isWebpSupported", isWebpSupported(), imagePath("desktop")); */
 
   const Page = styled.div`
     display: grid;
-    ${() =>
-      gridTemlateRows(
-        "clamp(8rem, 15vh, 10rem)",
-        "clamp(5rem, 10vh, 7rem)",
-        "1fr"
-      )}
+    ${() => gridTemlateRows("clamp(8rem, 15vh, 10rem)", "auto", "1fr")}
+    grid-template-columns: 100%;
     align-items: start;
-    min-height: 900px;
     height: 100vh;
     width: 100vw;
     background-color: black;
     background-size: cover;
     background-position: top left;
-    /* overflow-y: hidden; */
 
     ${() => backgroundImage("desktop")}
 
     @media (max-width: ${desktop_px}) {
-      ${() => gridTemlateRows("auto", "4rem", "1fr")}
+      ${() => gridTemlateRows("auto", "auto", "1fr")}
       ${() => backgroundImage("tablet")}
     }
     @media (max-width: ${tablet_px}) {
-      ${() => gridTemlateRows("5rem", "5rem", "1fr")}
+      ${() => gridTemlateRows("5.5rem", "auto", "1fr")}
       ${() => backgroundImage("mobile")}
+      height: 100%;
+      min-height: 100vh;
     }
   `;
 
   const Content = styled.div`
     display: grid;
-    width: clamp(320px, 100vw, 1450px);
+    width: clamp(320px, 88vw, 1450px);
     height: 100%;
     margin: 0 auto;
     padding: 0;
-    /* overflow: hidden; */
+    margin-inline-start: 12vw;
+
+    @media (max-width: ${desktop_px}) {
+      width: 100vw;
+      margin-inline-start: 0;
+    }
+
+    @media (max-width: ${tablet_px}) {
+      margin-block-start: 0;
+    }
+
+    @media (min-width: 1920px) {
+      margin-inline: auto;
+    }
   `;
 
   return ({ children }) => {

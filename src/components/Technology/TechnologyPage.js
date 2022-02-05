@@ -14,12 +14,11 @@ const desktop_px = desktop + "px";
 const Content = styled.section`
   display: grid;
   grid-template-areas: "navs info image";
-  grid-template-columns: auto 1fr minmax(22rem, 1fr);
+  grid-template-columns: auto 1fr 1fr;
   grid-template-rows: minmax(50vh, auto);
   gap: 5vw;
-  margin-block-start: 1rem;
-  margin-block-end: 5rem;
-  margin-inline-start: 4rem;
+  width: 100%;
+  margin-block-start: 2rem;
   justify-content: space-between;
   align-items: center;
   align-self: start;
@@ -31,9 +30,8 @@ const Content = styled.section`
     grid-template-rows: auto auto 1fr;
     justify-items: center;
     margin-block-start: 0;
-    /* margin-block-end: 20vh; */
     margin-inline: 0;
-    gap: 2.5rem;
+    gap: 0;
   }
 `;
 
@@ -46,12 +44,13 @@ const Subtitle = styled.h5`
   color: var(--color-gray);
 
   @media (max-width: ${desktop_px}) {
-    margin-bottom: 0;
+    margin-bottom: 0.5rem;
   }
 
   @media (max-width: ${tablet_px}) {
     font-size: 14px;
     letter-spacing: 2.36px;
+    margin-bottom: 0;
   }
 `;
 
@@ -62,24 +61,36 @@ const Title = styled.h3`
   @media (max-width: ${desktop_px}) {
     margin-bottom: 1rem;
   }
+
+  @media (max-width: ${tablet_px}) {
+    margin-bottom: 0.5rem;
+  }
+`;
+
+const Description = styled.p`
+  grid-area: description;
+  max-width: 30rem;
 `;
 
 const StyledNavs = styled(Navs)`
   grid-area: navs;
-  /* justify-self: end; */
-  margin-inline-start: 5vw;
-  /* align-self: start; */
 
   @media (max-width: ${desktop_px}) {
-    /* justify-self: center; */
+    height: auto;
     margin-inline-start: 0;
+    margin-block-start: 3rem;
+    margin-block-end: 2.5rem;
+  }
+
+  @media (max-width: ${tablet_px}) {
+    margin-block-start: 2rem;
+    margin-block-end: 1.5rem;
   }
 `;
 
 const Info = styled.div`
   display: grid;
   grid-template-areas: "subheader" "header" "description";
-  max-width: 30rem;
   text-align: start;
   justify-self: start;
   margin-inline-end: 2rem;
@@ -94,13 +105,13 @@ const Info = styled.div`
   }
 
   @media (max-width: ${tablet_px}) {
-    max-width: 80vw;
+    max-width: 85vw;
   }
 `;
 
 const Image = styled.img`
   grid-area: image;
-  max-width: 40vw;
+  max-width: 35vw;
   justify-self: end;
 
   @media (max-width: ${desktop_px}) {
@@ -111,7 +122,6 @@ const Image = styled.img`
 `;
 
 const pageName = "technology";
-const path = (fileName) => `assets/${pageName}/${fileName}`;
 
 const Page = createPage({
   activePageIndex: 3,
@@ -135,11 +145,13 @@ const technology = [
     "A spaceport or cosmodrome is a site for launching (or receiving) spacecraft, by analogy to the seaport for ships or airport for aircraft. Based in the famous Cape Canaveral, our spaceport is ideally situated to take advantage of the Earth’s rotation for launch."
   ),
   entry(
-    "space-capsule",
+    "space capsule",
     "A space capsule is an often-crewed spacecraft that uses a blunt-body reentry capsule to reenter the Earth's atmosphere without wings. Our capsule is where you'll spend your time during the flight. It includes a space gym, cinema, and plenty of other activities to keep you entertained."
   ),
 ];
 
+const { assetsDir } = data;
+const path = (fileName) => `${assetsDir}/${pageName}/${fileName}`;
 const kebab = (str) => str.replace(" ", "-");
 const imageUrl = (name, size, ext) => path(`${kebab(name)}-${size}.${ext}`);
 
@@ -170,7 +182,7 @@ const Technology = ({ viewportWidth }) => {
         <Info>
           <Subtitle>THE TERMINOLOGY...</Subtitle>
           <Title>{name}</Title>
-          <p style={{ gridArea: "description" }}>{description}</p>
+          <Description>{description}</Description>
         </Info>
         <Image src={imageUrl(name, size, ext)} alt="" />
       </Content>

@@ -1,4 +1,5 @@
 {
+  "assetsDir": "assets",
   "breakpoints": {
     "desktop": 1023,
     "tablet": 749

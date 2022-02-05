@@ -20,7 +20,7 @@
 
 .navbar.mobile {
   height: auto;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 }
 
 .logo {
@@ -35,6 +35,11 @@
 
 .mobile .logo {
   margin-inline-start: 2rem;
+  /* height: 40px; */
+}
+.mobile .logo img {
+  width: 40px;
+  height: 40px;
 }
 
 .menu {
@@ -117,7 +122,7 @@
 .toggler {
   /* display: hidden; */
   width: 2rem;
-  margin-inline-end: 2rem;
+  margin-inline-end: 1.5rem;
   background-color: transparent;
   border: none;
   cursor: pointer;

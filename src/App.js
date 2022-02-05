@@ -11,7 +11,7 @@ import "./App.css";
 import data from "./data.json";
 
 const { desktop, tablet } = data.breakpoints;
-const ASSETS_DIR = "assets";
+const { assetsDir } = data;
 // const hasWebp = await isWebpSupported();
 
 function App({ isWebpSupported }) {
@@ -29,21 +29,23 @@ function App({ isWebpSupported }) {
       : "desktop";
 
   const sizeNoMobile = size === "mobile" ? "tablet" : size;
-  const ext = (defaultExtension) =>
-    isWebpSupported ? "webp" : defaultExtension;
 
-  preload(
-    [
-      `${ASSETS_DIR}/home/bg-home-${size}.${ext("jpg")}`,
-      `${ASSETS_DIR}/destination/bg-destination-${size}.${ext("jpg")}`,
-      `${ASSETS_DIR}/crew/bg-crew-${size}.${ext("jpg")}`,
-      `${ASSETS_DIR}/technology/bg-technology-${size}.${ext("jpg")}`,
-      `${ASSETS_DIR}/destination/moon.${ext("png")}`,
-      `${ASSETS_DIR}/crew/douglas-hurley.${ext("png")}`,
-      `${ASSETS_DIR}/technology/launch-vehicle-${sizeNoMobile}.${ext("jpg")}`,
-    ],
-    1000
-  );
+  useEffect(() => {
+    const ext = (defaultExtension) =>
+      isWebpSupported ? "webp" : defaultExtension;
+    preload(
+      [
+        `${assetsDir}/home/bg-home-${size}.${ext("jpg")}`,
+        `${assetsDir}/destination/bg-destination-${size}.${ext("jpg")}`,
+        `${assetsDir}/crew/bg-crew-${size}.${ext("jpg")}`,
+        `${assetsDir}/technology/bg-technology-${size}.${ext("jpg")}`,
+        `${assetsDir}/destination/moon.${ext("png")}`,
+        `${assetsDir}/crew/douglas-hurley.${ext("png")}`,
+        `${assetsDir}/technology/launch-vehicle-${sizeNoMobile}.${ext("jpg")}`,
+      ],
+      1000
+    );
+  }, [isWebpSupported, size, sizeNoMobile]);
 
   return (
     <div className="App">
