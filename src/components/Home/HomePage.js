@@ -3,9 +3,7 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { createPage } from "../Page";
 import ActionButton from "../ActionButton/ActionButton";
-import data from "../../data.json";
-
-// const path = (fileName) => `assets/Home/${fileName}`;
+import data from "../../data.js";
 
 const Page = createPage({
   activePageIndex: 0,

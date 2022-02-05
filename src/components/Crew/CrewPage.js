@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { createPage } from "../Page";
 import Navs from "../Navs/Bullets";
-import data from "../../data.json";
+import data from "../../data.js";
 import { preload, isWebpSupported } from "../../helpers";
 
 const tablet = data.breakpoints.tablet + "px";
@@ -132,8 +132,6 @@ const Image = styled.img`
   }
 `;
 
-const pageName = "crew";
-
 const crew = [
   {
     url: "#douglas_hurley",
@@ -165,6 +163,8 @@ const crew = [
   },
 ];
 
+const pageName = "crew";
+
 const Page = createPage({
   activePageIndex: 2,
   heading: "meet your crew",
@@ -174,7 +174,17 @@ const Page = createPage({
 const { assetsDir } = data;
 const path = (fileName) => `${assetsDir}/${pageName}/${fileName}`;
 const kebab = (name) => name.toLowerCase().replace(" ", "-");
-const imageUrl = (name, ext) => path(`${kebab(name)}.${ext}`);
+const imageUrl = (name) =>
+  path(`${kebab(name)}.${isWebpSupported() ? "webp" : "png"}`);
+
+export const preloadPageImage = (image = 0, delay = 1000) => {
+  if (typeof image === "number") {
+    preload(imageUrl(crew[image].name), delay);
+    return;
+  }
+
+  preload(imageUrl(image), delay);
+};
 
 const Crew = () => {
   const { hash } = useLocation();
@@ -184,11 +194,10 @@ const Crew = () => {
   );
 
   const { rank, name, description } = crew[index];
-  const ext = isWebpSupported() ? "webp" : "jpg";
 
   useEffect(() => {
-    preload([...crew.map(({ name }) => imageUrl(name, ext))]);
-  }, [ext]);
+    crew.forEach(({ name }) => preloadPageImage(name));
+  }, []);
 
   return (
     <Page>
@@ -201,7 +210,7 @@ const Crew = () => {
           {/* </div> */}
           <StyledNavs items={crew} bullets activeItem={index} />
         </Info>
-        <Image src={imageUrl(name, ext)} alt="" />
+        <Image src={imageUrl(name)} alt="" />
       </Content>
     </Page>
   );

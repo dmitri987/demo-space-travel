@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import NavBar from "./NavBar/NavBar";
-import { subscribeViewportWidthObserver, isWebpSupported } from "../helpers";
-import data from "../data.json";
+import { subscribeViewportWidthObserver } from "../helpers";
+import data from "../data.js";
 
 const tablet = data.breakpoints.tablet;
 const desktop = data.breakpoints.desktop;
@@ -65,11 +65,9 @@ export const createPage = ({ activePageIndex, heading, pageName }) => {
         `;
 
   const backgroundImage = (size, ext = "jpg") => {
-    const path = `'assets/${pageName}/bg-${pageName}-${size}.${
-      isWebpSupported() ? "webp" : ext
-    }'`;
+    const path = data.getBackgroundImagePath(pageName, size, ext);
     return css`
-      background-image: url(${path});
+      background-image: url("${path}");
     `;
   };
 
@@ -120,7 +118,7 @@ export const createPage = ({ activePageIndex, heading, pageName }) => {
     }
   `;
 
-  return ({ children }) => {
+  return function PageComponent({ children }) {
     const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
 
     useEffect(() => {

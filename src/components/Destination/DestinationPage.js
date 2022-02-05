@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { createPage } from "../Page";
 import Navs from "../Navs/Tabs";
-import data from "../../data.json";
+import data from "../../data.js";
 import { preload, isWebpSupported } from "../../helpers";
 
 const desktop = data.breakpoints.desktop + "px";
@@ -130,14 +130,6 @@ const Delimiter = styled.hr`
   }
 `;
 
-const pageName = "destination";
-
-const Page = createPage({
-  activePageIndex: 1,
-  heading: "pick your destination",
-  pageName,
-});
-
 const planets = [
   {
     title: "moon",
@@ -173,9 +165,27 @@ const planets = [
   },
 ];
 
+const pageName = "destination";
+
+const Page = createPage({
+  activePageIndex: 1,
+  heading: "pick your destination",
+  pageName,
+});
+
 const { assetsDir } = data;
 const path = (fileName) => `${assetsDir}/${pageName}/${fileName}`;
-const imageUrl = (name, ext) => path(`${name}.${ext}`);
+const imageUrl = (name) =>
+  path(`${name}.${isWebpSupported() ? "webp" : "jpg"}`);
+
+export const preloadPageImage = (image = 0, delay = 1000) => {
+  if (typeof image === "number") {
+    preload(imageUrl(planets[image].title), delay);
+    return;
+  }
+
+  preload(imageUrl(image), delay);
+};
 
 const Destination = () => {
   const { hash } = useLocation();
@@ -185,16 +195,15 @@ const Destination = () => {
   );
 
   const { title, description, avgDistance, estTravelTime } = planets[index];
-  const ext = isWebpSupported() ? "webp" : "jpg";
 
   useEffect(() => {
-    preload([...planets.map(({ title }) => imageUrl(title, ext))]);
-  }, [ext]);
+    planets.forEach(({ title }) => preloadPageImage(title, 0));
+  }, []);
 
   return (
     <Page>
       <Content>
-        <Image src={imageUrl(title, ext)} alt="" />
+        <Image src={imageUrl(title)} alt="" />
         <Info>
           <StyledNavs items={planets} tabs activeItem={index} />
           <Name>{title}</Name>

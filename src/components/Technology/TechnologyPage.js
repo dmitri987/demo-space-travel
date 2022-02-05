@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { createPage } from "../Page";
 import Navs from "../Navs/Rounds";
-import data from "../../data.json";
+import data from "../../data.js";
 import { preload, isWebpSupported } from "../../helpers";
 
 const tablet = data.breakpoints.tablet;
@@ -121,14 +121,6 @@ const Image = styled.img`
   }
 `;
 
-const pageName = "technology";
-
-const Page = createPage({
-  activePageIndex: 3,
-  heading: "space launch 101",
-  pageName,
-});
-
 const entry = (name, description) => ({
   url: `#${name.replace(" ", "_")}`,
   name,
@@ -150,10 +142,32 @@ const technology = [
   ),
 ];
 
+const pageName = "technology";
+
+const Page = createPage({
+  activePageIndex: 3,
+  heading: "space launch 101",
+  pageName,
+});
+
 const { assetsDir } = data;
 const path = (fileName) => `${assetsDir}/${pageName}/${fileName}`;
 const kebab = (str) => str.replace(" ", "-");
-const imageUrl = (name, size, ext) => path(`${kebab(name)}-${size}.${ext}`);
+
+const imageUrl = (viewportWidth, name) => {
+  const size = viewportWidth > desktop ? "desktop" : "tablet";
+  const ext = isWebpSupported() ? "webp" : "jpg";
+  return path(`${kebab(name)}-${size}.${ext}`);
+};
+
+export const preloadPageImage = (viewportWidth, image = 0, delay = 1000) => {
+  if (typeof image === "number") {
+    preload(imageUrl(viewportWidth, technology[image].name), delay);
+    return;
+  }
+
+  preload(imageUrl(viewportWidth, image), delay);
+};
 
 const Technology = ({ viewportWidth }) => {
   const { hash } = useLocation();
@@ -164,12 +178,9 @@ const Technology = ({ viewportWidth }) => {
 
   const { name, description } = technology[index];
 
-  const size = viewportWidth > desktop ? "desktop" : "tablet";
-  const ext = isWebpSupported() ? "webp" : "jpg";
-
   useEffect(() => {
-    preload([...technology.map(({ name }) => imageUrl(name, size, ext))]);
-  }, [size, ext]);
+    technology.forEach(({ name }) => preloadPageImage(viewportWidth, name, 0));
+  }, [viewportWidth]);
 
   return (
     <Page>
@@ -184,7 +195,7 @@ const Technology = ({ viewportWidth }) => {
           <Title>{name}</Title>
           <Description>{description}</Description>
         </Info>
-        <Image src={imageUrl(name, size, ext)} alt="" />
+        <Image src={imageUrl(viewportWidth, name)} alt="" />
       </Content>
     </Page>
   );

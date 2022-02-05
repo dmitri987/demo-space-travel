@@ -13,33 +13,6 @@ export const subscribeViewportWidthObserver = (callback) => {
   };
 };
 
-// preload images with <link> element
-const REMOVE_LINK_DELAY = 5000;
-
-const preloadedImages = new Set();
-
-const _preload = (path, delay_ms) => {
-  if (preloadedImages.has(path)) return;
-
-  preloadedImages.add(path);
-
-  setTimeout(() => {
-    const link = document.createElement("link");
-    link.rel = "preload";
-    link.as = "image";
-    link.href = path;
-    document.head.insertAdjacentElement("beforeend", link);
-
-    console.log(`preload '${path}'`, document.timeline.currentTime, delay_ms);
-    setTimeout(() => link.remove(), REMOVE_LINK_DELAY);
-  }, delay_ms);
-};
-
-export const preload = (paths, delay_ms = 0) => {
-  const _paths = paths instanceof Array ? paths : [paths];
-  _paths.forEach((path) => _preload(path, delay_ms));
-};
-
 // check for WebP support
 // from here: https://stackoverflow.com/questions/5573096/detecting-webp-support
 let _isWebpSupported = false;
@@ -54,5 +27,40 @@ export function testWebpSupport() {
     };
   });
 }
-
 export const isWebpSupported = () => _isWebpSupported;
+
+// preload images with <link> element
+const REMOVE_LINK_DELAY = 5000;
+
+const preloadedImages = new Set();
+
+const _preload = (path, delay_ms) => {
+  if (preloadedImages.has(path)) return;
+
+  preloadedImages.add(path);
+
+  setTimeout(() => {
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "image";
+    if (isWebpSupported() && !path.endsWith("webp")) {
+      const lastDot = path.search(/\.[^.]*$/);
+      link.href = path.slice(0, lastDot) + "webp";
+    } else {
+      link.href = path;
+    }
+    document.head.insertAdjacentElement("beforeend", link);
+
+    console.log(
+      `preload '${link.href}'`,
+      document.timeline.currentTime,
+      delay_ms
+    );
+    setTimeout(() => link.remove(), REMOVE_LINK_DELAY);
+  }, delay_ms);
+};
+
+export const preload = (paths, delay_ms = 0) => {
+  const _paths = paths instanceof Array ? paths : [paths];
+  _paths.forEach((path) => _preload(path, delay_ms));
+};

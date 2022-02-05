@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import data from "../../data.json";
+import data from "../../data.js";
 
 const tablet = data.breakpoints.tablet + "px";
 const desktop = data.breakpoints.desktop + "px";

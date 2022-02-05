@@ -2,50 +2,33 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import HomePage from "./components/Home/HomePage";
-import DestinationPage from "./components/Destination/DestinationPage";
-import CrewPage from "./components/Crew/CrewPage";
-import TechnologyPage from "./components/Technology/TechnologyPage";
+import DestinationPage, {
+  preloadPageImage as preloadDefaultDestinationImage,
+} from "./components/Destination/DestinationPage";
+import CrewPage, {
+  preloadPageImage as preloadDefaultCrewImage,
+} from "./components/Crew/CrewPage";
+import TechnologyPage, {
+  preloadPageImage as preloadDefaultTechnologyImage,
+} from "./components/Technology/TechnologyPage";
 import ProjectInfo from "./components/ProjectInfo/ProjectInfo";
-import { subscribeViewportWidthObserver, preload } from "./helpers";
+import { subscribeViewportWidthObserver } from "./helpers";
 import "./App.css";
-import data from "./data.json";
+import data from "./data.js";
 
-const { desktop, tablet } = data.breakpoints;
-const { assetsDir } = data;
-// const hasWebp = await isWebpSupported();
-
-function App({ isWebpSupported }) {
+function App() {
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     return subscribeViewportWidthObserver(setViewportWidth);
   }, []);
 
-  const size =
-    viewportWidth <= tablet
-      ? "mobile"
-      : viewportWidth <= desktop
-      ? "tablet"
-      : "desktop";
-
-  const sizeNoMobile = size === "mobile" ? "tablet" : size;
-
   useEffect(() => {
-    const ext = (defaultExtension) =>
-      isWebpSupported ? "webp" : defaultExtension;
-    preload(
-      [
-        `${assetsDir}/home/bg-home-${size}.${ext("jpg")}`,
-        `${assetsDir}/destination/bg-destination-${size}.${ext("jpg")}`,
-        `${assetsDir}/crew/bg-crew-${size}.${ext("jpg")}`,
-        `${assetsDir}/technology/bg-technology-${size}.${ext("jpg")}`,
-        `${assetsDir}/destination/moon.${ext("png")}`,
-        `${assetsDir}/crew/douglas-hurley.${ext("png")}`,
-        `${assetsDir}/technology/launch-vehicle-${sizeNoMobile}.${ext("jpg")}`,
-      ],
-      1000
-    );
-  }, [isWebpSupported, size, sizeNoMobile]);
+    data.preloadBackgroundImages(viewportWidth);
+    preloadDefaultCrewImage();
+    preloadDefaultDestinationImage();
+    preloadDefaultTechnologyImage(viewportWidth);
+  }, [viewportWidth]);
 
   return (
     <div className="App">
