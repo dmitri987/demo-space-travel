@@ -154,6 +154,16 @@ const ProjectInfo = (props) => {
             Originally it was done with vanilla JS/HTML/CSS. I thought I'd do it
             with React.
           </p>
+          <p>
+            GitHub repository:{" "}
+            <a
+              href="https://github.com/dmitri987/demo-space-travel"
+              target="_blank"
+              rel="noreferrer"
+            >
+              demo-space-travel
+            </a>
+          </p>
           <h5>Used technologies</h5>
           <List>
             <ListItem title="React" url="https://reactjs.org/" />

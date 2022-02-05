@@ -176,7 +176,7 @@ const Page = createPage({
 const { assetsDir } = data;
 const path = (fileName) => `${assetsDir}/${pageName}/${fileName}`;
 const imageUrl = (name) =>
-  path(`${name}.${isWebpSupported() ? "webp" : "jpg"}`);
+  path(`${name}.${isWebpSupported() ? "webp" : "png"}`);
 
 export const preloadPageImage = (image = 0, delay = 1000) => {
   if (typeof image === "number") {

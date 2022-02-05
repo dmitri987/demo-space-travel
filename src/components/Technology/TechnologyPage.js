@@ -106,6 +106,7 @@ const Info = styled.div`
 
   @media (max-width: ${tablet_px}) {
     max-width: 85vw;
+    padding-block-end: 5rem;
   }
 `;
 
