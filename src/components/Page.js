@@ -103,9 +103,10 @@ export const createPage = ({ activePageIndex, heading, pageName }) => {
     margin: 0 auto;
     padding: 0;
     margin-inline-start: 12vw;
+    overflow-y: hidden;
 
     @media (max-width: ${desktop_px}) {
-      width: 100vw;
+      width: 100%;
       margin-inline-start: 0;
     }
 

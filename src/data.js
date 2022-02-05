@@ -21,7 +21,8 @@ data.getBackgroundImagePath = function (
   size,
   defaultExtension = "jpg"
 ) {
-  return `${data.assetsDir}/${pageName}/bg-${pageName}-${size}.${defaultExtension}`;
+  const ext = isWebpSupported() ? "webp" : defaultExtension;
+  return `${data.assetsDir}/${pageName}/bg-${pageName}-${size}.${ext}`;
 };
 
 data.preloadBackgroundImages = function (viewportWidth) {
@@ -32,10 +33,8 @@ data.preloadBackgroundImages = function (viewportWidth) {
       ? "tablet"
       : "desktop";
 
-  const ext = isWebpSupported() ? "webp" : "jpg";
-
   data.navBar.forEach(({ title: pageName }) =>
-    preload(data.getBackgroundImagePath(pageName, size, ext), 1000)
+    preload(data.getBackgroundImagePath(pageName, size, "jpg"), 1000)
   );
 };
 
